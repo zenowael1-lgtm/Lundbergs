@@ -1,697 +1,328 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lundbergs Konditori — Gröndal</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg: #FDFBF7;
-            --card: #FFFFFF;
-            --text: #2B1E17;
-            --muted: #6F625B;
-            --border: #E8E2D9;
-            --accent: #607256;
-            --gold: #C5A880;
-            --shadow: 0 40px 90px rgba(43,30,23,.04);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            line-height: 1.7;
-            overflow-x: hidden;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        section {
-            padding: 140px 24px;
-            position: relative;
-        }
-
-        .container {
-            width: min(1200px, 100%);
-            margin: auto;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-        }
-
-        p {
-            color: var(--muted);
-        }
-
-        /* PREMIUM NATURAL OVERLAYS & GRAIN */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: .04;
-            background-image: 
-                radial-gradient(circle at 30% 20%, rgba(0,0,0,.2) 1px, transparent 1px),
-                radial-gradient(circle at 70% 60%, rgba(0,0,0,.15) 1px, transparent 1px);
-            background-size: 24px 24px;
-            z-index: 50;
-        }
-
-        /* AMBIENT GLOW BLOBS */
-        .ambient-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: .12;
-            z-index: -5;
-            pointer-events: none;
-        }
-        .glow1 { background: var(--accent); top: -200px; left: -150px; animation: drift 22s ease-in-out infinite; }
-        .glow2 { background: var(--gold); right: -150px; bottom: -200px; animation: drift 22s ease-in-out infinite reverse; }
-
-        @keyframes drift {
-            0%, 100% { transform: translate(0,0) scale(1); }
-            50% { transform: translate(80px, -60px) scale(1.1); }
-        }
-
-        /* HEADER & NAVIGATION */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 999;
-            backdrop-filter: blur(20px);
-            background: rgba(253, 251, 247, 0.85);
-            border-bottom: 1px solid rgba(43, 30, 23, 0.05);
-            transition: all 0.4s ease;
-        }
-
-        .nav {
-            height: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            max-width: 1200px;
-            margin: auto;
-            padding: 0 24px;
-        }
-
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--text);
-            text-decoration: none;
-            letter-spacing: -0.03em;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        nav a {
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: var(--text);
-            transition: color 0.3s;
-            letter-spacing: 0.02em;
-        }
-
-        nav a:hover {
-            color: var(--accent);
-        }
-
-        /* CINEMATIC HERO UPGRADE */
-        .hero-cinema {
-            position: relative;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-            background: #140F0A;
-        }
-
-        .hero-cinema video {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            opacity: 0.55;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, rgba(20,15,10,0.4), rgba(253,251,247,1) 98%);
-            z-index: 2;
-        }
-
-        .hero-contents {
-            position: relative;
-            z-index: 3;
-            max-width: 920px;
-            padding: 0 24px;
-            margin-top: -40px;
-        }
-
-        .badge-google {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 20px;
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 999px;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-            color: white;
-        }
-
-        .badge-google span { color: #FFC107; font-size: 1.1rem; }
-
-        .hero-subtitle {
-            font-size: 0.85rem;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            color: var(--gold);
-            font-weight: 700;
-        }
-
-        .hero-cinema h1 {
-            font-size: clamp(3.5rem, 8vw, 6.5rem);
-            line-height: 1.02;
-            margin-bottom: 30px;
-            color: white;
-            font-weight: 600;
-        }
-
-        .hero-lead {
-            font-size: 1.25rem;
-            max-width: 680px;
-            margin: 0 auto 45px;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 300;
-        }
-
-        .cta-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 18px 38px;
-            border-radius: 999px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(.25, 1, .5, 1);
-            font-size: 0.95rem;
-        }
-
-        .btn-solid {
-            background: var(--accent);
-            color: white;
-            box-shadow: 0 15px 40px rgba(96, 114, 86, 0.3);
-        }
-
-        .btn-solid:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 22px 50px rgba(96, 114, 86, 0.45);
-            background: #4f5f46;
-        }
-
-        .btn-outline {
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            backdrop-filter: blur(8px);
-        }
-
-        .btn-outline:hover {
-            background: white;
-            color: var(--text);
-            transform: translateY(-4px);
-        }
-
-        /* WHEAT ANIMATION ENGINE */
-        .wheat-wrapper {
-            position: absolute;
-            bottom: 40px;
-            width: 140px;
-            height: 220px;
-            pointer-events: none;
-            opacity: 0.8;
-            z-index: 4;
-        }
-        .wheat-left { left: 40px; transform-origin: bottom left; animation: swayWheat 6s ease-in-out infinite alternate; }
-        .wheat-right { right: 40px; transform-origin: bottom right; animation: swayWheat 7s ease-in-out infinite alternate-reverse; }
-
-        @keyframes swayWheat {
-            0% { transform: rotate(-2deg) translateY(0); }
-            100% { transform: rotate(5deg) translateY(-5px); }
-        }
-
-        /* FEATURE INFO CARDS */
-        .feature-showcase {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: -80px;
-            position: relative;
-            z-index: 10;
-            padding: 0 24px;
-        }
-
-        .feat-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 45px 40px;
-            box-shadow: var(--shadow);
-            transition: all 0.4s cubic-bezier(.25, 1, .5, 1);
-        }
-
-        .feat-card:hover {
-            transform: translateY(-12px);
-            border-color: var(--gold);
-        }
-
-        .feat-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--text);
-        }
-
-        /* VISUAL ASSETS CONTAINER */
-        .editorial-gallery {
-            display: grid;
-            grid-template-columns: 1.8fr 1.2fr;
-            gap: 32px;
-            margin-top: 100px;
-        }
-
-        .gallery-box {
-            overflow: hidden;
-            border-radius: 32px;
-            box-shadow: var(--shadow);
-            position: relative;
-            height: 520px;
-        }
-
-        .gallery-box img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 1.2s cubic-bezier(.25, 1, .5, 1);
-        }
-
-        .gallery-box:hover img {
-            transform: scale(1.05);
-        }
-
-        /* COFFEE SMOKE ENGINE */
-        .smoke-container {
-            position: absolute;
-            top: -45px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 50px;
-            pointer-events: none;
-        }
-
-        .smoke-stream {
-            position: absolute;
-            bottom: 0;
-            width: 4px;
-            background: rgba(96, 114, 86, 0.15);
-            border-radius: 50%;
-            filter: blur(4px);
-            animation: riseSmoke 4s infinite linear;
-        }
-        .smoke1 { left: 20px; height: 35px; animation-delay: 0s; }
-        .smoke2 { left: 30px; height: 45px; animation-delay: 1.5s; }
-        .smoke3 { left: 40px; height: 30px; animation-delay: 0.8s; }
-
-        @keyframes riseSmoke {
-            0% { transform: translateY(0) scaleX(1); opacity: 0; }
-            15% { opacity: 0.6; }
-            60% { transform: translateY(-30px) scaleX(2.5); opacity: 0.2; }
-            100% { transform: translateY(-50px) scaleX(4); opacity: 0; }
-        }
-
-        /* LUXURY MENU DESIGN */
-        .section-header {
-            text-align: center;
-            max-width: 750px;
-            margin: 0 auto 90px;
-            position: relative;
-        }
-
-        .section-header .tag {
-            font-size: 0.8rem;
-            letter-spacing: 5px;
-            color: var(--accent);
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .section-header h2 {
-            font-size: 3.4rem;
-            margin: 15px 0 25px;
-            line-height: 1.1;
-        }
-
-        .menu-wrapper {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .menu-category-block {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 32px;
-            padding: 40px;
-            box-shadow: var(--shadow);
-        }
-
-        .menu-category-block h3 {
-            font-size: 1.7rem;
-            margin-bottom: 35px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
-            display: relative;
-        }
-
-        .menu-node {
-            display: flex;
-            align-items: baseline;
-            margin-bottom: 24px;
-            gap: 12px;
-        }
-
-        .menu-node-title {
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-
-        .menu-node-leader {
-            flex: 1;
-            border-bottom: 1px dotted #D0C6B9;
-        }
-
-        .menu-node-price {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            color: var(--text);
-        }
-
-        /* PREMIUM TESTIMONIALS (GOOGLE MAPS AESTHETIC) */
-        .reviews-masonry {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 28px;
-            margin-top: 20px;
-        }
-
-        .review-node {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            padding: 35px;
-            box-shadow: var(--shadow);
-        }
-
-        .review-user {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .review-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #EFEBE4;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .review-stars {
-            color: #FFC107;
-            font-size: 0.9rem;
-            margin-top: 4px;
-        }
-
-        /* HERITAGE STORY SECTION */
-        .story-layout {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .story-layout h2 {
-            font-size: 3.4rem;
-            margin: 15px 0 30px;
-            line-height: 1.1;
-        }
-
-        /* OPERATIONAL INFO & CONCIERGE FORM */
-        .hub-layout {
-            display: grid;
-            grid-template-columns: 1.1fr 1.9fr;
-            gap: 40px;
-        }
-
-        .info-panel {
-            background: white;
-            border: 1px solid var(--border);
-            padding: 50px 45px;
-            border-radius: 32px;
-            box-shadow: var(--shadow);
-        }
-
-        .info-panel h3 { font-size: 1.8rem; margin-bottom: 30px; }
-
-        .schedule-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px 0;
-            border-bottom: 1px solid rgba(43,30,23,0.06);
-        }
-        .schedule-row:last-of-type { border: none; }
-
-        .concierge-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 32px;
-            padding: 55px;
-            box-shadow: var(--shadow);
-        }
-
-        .concierge-card h2 { font-size: 2.8rem; margin-bottom: 15px; }
-
-        .lux-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-top: 35px;
-        }
-
-        .lux-form .full-width { grid-column: span 2; }
-
-        .lux-form input, .lux-form textarea {
-            width: 100%;
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            background: #FDFBF7;
-            font-family: inherit;
-            font-size: 1rem;
-            transition: border 0.3s;
-        }
-
-        .lux-form input:focus, .lux-form textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-
-        .btn-submit {
-            grid-column: span 2;
-            padding: 20px;
-            background: var(--text);
-            color: white;
-            border: none;
-            border-radius: 999px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-submit:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        /* ARCHITECTURAL FOOTER */
-        footer {
-            background: #140F0A;
-            color: rgba(255,255,255,0.7);
-            padding: 100px 24px 60px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-framework {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
-            margin: auto;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding-bottom: 60px;
-        }
-
-        .footer-framework h3 { color: white; margin-bottom: 20px; font-size: 1.6rem; }
-
-        .footer-credits {
-            max-width: 1200px;
-            margin: 30px auto 0;
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.4);
-        }
-
-        /* CORE PRELOADER */
-        #preloader {
-            position: fixed;
-            inset: 0;
-            background: #FDFBF7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10000;
-            transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .preloader-brand { font-family: "Playfair Display", serif; font-size: 3.5rem; letter-spacing: -2px; }
-
-        /* SCROLL MONITOR BAR */
-        #scroll-monitor {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 4px;
-            width: 0;
-            background: var(--accent);
-            z-index: 100000;
-        }
-
-        /* BACK TO SUMMIT BUTTON */
-        #back-to-summit {
-            position: fixed;
-            right: 30px;
-            bottom: 30px;
-            width: 56px;
-            height: 56px;
-            border: 1px solid var(--border);
-            border-radius: 50%;
-            background: white;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.4s;
-            z-index: 99;
-        }
-        #back-to-summit.visible { opacity: 1; transform: none; }
-        #back-to-summit:hover { background: var(--accent); color: white; border-color: var(--accent); }
-
-        /* RESPONSIVE BREAKPOINTS */
-        @media(max-width: 1024px) {
-            .menu-wrapper, .reviews-masonry, .feature-showcase { grid-template-columns: 1fr; }
-            .story-layout, .editorial-gallery, .hub-layout, .footer-framework { grid-template-columns: 1fr; }
-            .gallery-box { height: 350px; }
-            .feature-showcase { margin-top: 40px; }
-            section { padding: 90px 24px; }
-            .lux-form { grid-template-columns: 1fr; }
-            .lux-form .full-width { grid-column: span 1; }
-            .btn-submit { grid-column: span 1; }
-            .concierge-card { padding: 35px; }
-            .wheat-wrapper { display: none; }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lundbergs Konditori</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+<style>
+  /* Reset and Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #FDFBF7;
+  color: #2B1E17;
+  line-height: 1.6;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Typography */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+}
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+}
+h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Layout Containers */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
+  background: transparent;
+  scrollbar-width: none; /* Firefox */
+}
+header::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+nav {
+  display: flex;
+  gap: 2rem;
+  flex-shrink: 0;
+}
+nav a {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+nav a:hover {
+  color: #607256;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1rem;
+  background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.7&auto=format&fit=crop&w=1950&q=80');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  top:0; left:0; right:0; bottom:0;
+  background-color: rgba(251, 245, 233, 0.4);
+}
+.hero-content {
+  position: relative;
+  max-width: 800px;
+  text-align: center;
+  color: #2B1E17;
+  z-index: 1;
+  padding: 2rem;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 6vw, 5rem);
+  margin-bottom: 1rem;
+}
+.hero p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.btn-cta {
+  background-color: transparent;
+  color: #607256;
+  border: 2px solid #607256;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.btn-cta:hover {
+  background-color: #607256;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(96, 114, 86, 0.2);
+}
+
+/* Section Styles */
+section {
+  padding: 4rem 0;
+}
+section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+.card {
+  border: 1px solid #E6DFD5;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+}
+.menu-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+.menu-item span {
+  display: inline-block;
+}
+.item-name {
+  font-weight: 600;
+}
+.leader {
+  flex: 1;
+  border-bottom: 1px dotted #E6DFD5;
+  margin: 0 0.5rem;
+}
+.price {
+  font-weight: 600;
+}
+
+/* Kontakt & Footer */
+footer {
+  background-color: #FDFBF7;
+  padding: 2rem 1rem;
+  border-top: 1px solid #E6DFD5;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+footer p {
+  margin: 0.5rem 0;
+}
+footer a {
+  color: #2B1E17;
+  font-weight: 600;
+}
+
+/* Responsive Adjustments */
+@media(max-width: 600px){
+  h1 {
+    font-size: clamp(2rem, 6vw, 3rem);
+  }
+  section {
+    padding: 2rem 1rem;
+  }
+}
+</style>
 </head>
 <body>
 
-    <div id="preloader"><div class="preloader-brand">Lundbergs</div></div>
-    <div id="scroll-monitor"></div>
-    <div class="ambient-glow glow1"></div>
-    <div class="ambient-glow glow2"></div>
-    <button id="back-to-summit">↑</button>
+<header>
+  <nav>
+    <a href="#hem">Hem</a>
+    <a href="#oppettider">Öppettider</a>
+    <a href="#meny">Meny</a>
+    <a href="#om-oss">Om oss</a>
+    <a href="#kontakt">Kontakt</a>
+  </nav>
+</header>
 
-    <header id="main-header">
-        <div class="nav">
-            <a href="#" class="logo">Lundbergs</a>
-            <nav>
-                <ul>
-                    <li><a href="#meny">Meny</a></li>
-                    <li><a href="#om">Om oss</a></li>
-                    <li><a href="#recensioner">Recensioner</a></li>
-                    <li><a href="#besok">Besök</a></li>
-                </ul>
-            </nav>
+<section class="hero" id="hem">
+  <div class="hero-content">
+    <h1>Lundbergs Konditori</h1>
+    <p>Traditionellt hantverk med modern elegans i Gröndal sedan 1940-talet.</p>
+    <button class="btn-cta" onclick="document.getElementById('meny').scrollIntoView({behavior:'smooth'});">Se Vårt Utbud</button>
+  </div>
+</section>
+
+<section id="oppettider" style="background-color:#fff;">
+  <div class="container">
+    <h2>Öppettider</h2>
+    <p style="text-align:center;">Mån-Fre: 07:30 - 18:00 | Lör-Sön: 09:00 - 16:00</p>
+  </div>
+</section>
+
+<section id="meny" style="background-color:#f9f4e4;">
+  <div class="container">
+    <h2>Meny</h2>
+    <div class="cards">
+      <!-- Kaffe -->
+      <div class="card">
+        <h3>Kaffe</h3>
+        <div class="menu-item">
+          <span class="item-name">Espresso</span>
+          <span class="leader"></span>
+          <span class="price">30 kr</span>
         </div>
-    </header>
+        <div class="menu-item">
+          <span class="item-name">Cappuccino</span>
+          <span class="leader"></span>
+          <span class="price">35 kr</span>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Filtret</span>
+          <span class="leader"></span>
+          <span class="price">35 kr</span>
+        </div>
+      </div>
+      <!-- Bullar -->
+      <div class="card">
+        <h3>Bullar</h3>
+        <div class="menu-item">
+          <span class="item-name">Kardemummabulle</span>
+          <span class="leader"></span>
+          <span class="price">35 kr</span>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Vaniljbulle</span>
+          <span class="leader"></span>
+          <span class="price">35 kr</span>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Chokladbulle</span>
+          <span class="leader"></span>
+          <span class="price">30 kr</span>
+        </div>
+      </div>
+      <!-- Tårtor -->
+      <div class="card">
+        <h3>Tårtor</h3>
+        <div class="menu-item">
+          <span class="item-name">Prinsesstårta</span>
+          <span class="leader"></span>
+          <span class="price">75 kr</span>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Mazarintårta</span>
+          <span class="leader"></span>
+          <span class="price">80 kr</span>
+        </div>
+        <div class="menu-item">
+          <span class="item-name">Chokladtårta</span>
+          <span class="leader"></span>
+          <span class="price">85 kr</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- ULTIMATE CINEMATIC HERO -->
-    <section class="hero-cinema">
-        <video autoplay muted loop playsinline>
-            <source src="https://player.vimeo.com/external/434045526.sd.mp4?s=41b47fbbf7dfd8af0ef6b26c84c5dd96d3d2cfbb&profile_id=165&oauth2_token_id=57447761" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        
-        <!-- Swaying Wheat Left -->
-        <svg class="wheat-wrapper wheat-left" viewBox="0 0 100 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 200 Q 30 120 25 40 M 25 40 Q 15 25 22 10 Q 30 25 25 40 M 23 60 Q 10 50 24 45 M 25 80 Q 40 70 26 65 M 22 100 Q 8 90 23 85" stroke="#C5A880" stroke-width="2" stroke-linecap="ro
+<section id="om-oss" style="background-color:#fff;">
+  <div class="container">
+    <h2>Om oss</h2>
+    <p style="max-width:800px; margin:auto; text-align:center;">Lundbergs Konditori är en familjeägd pärla i Gröndal, där vi sedan 1940-talet bakar allt från grunden med kärlek och precision. Vår passion är att skapa svenska klassiker med en modern tvist, med ingredienser av högsta kvalitet. Kom förbi och upplev en stunds avkoppling i en tidlös miljö.</p>
+  </div>
+</section>
+
+<section id="kontakt" style="background-color:#f9f4e4;">
+  <div class="container">
+    <h2>Kontakt</h2>
+    <p>Adress: Sjöbjörnsvägen 2, 117 67 Stockholm</p>
+    <p>Telefon: 08-645 20 34</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>Öppettider: Mån-Fre 07:30-18:00 | Lör-Sön 09:00-16:00</p>
+    <p>&copy; 2024 Lundbergs Konditori</p>
+    <p>Sjöbjörnsvägen 2, Stockholm</p>
+  </div>
+</footer>
+
+<!-- Optional: Add simple animations for steam or wheat as SVG or CSS animations -->
+<script>
+  // Optional JavaScript for future enhancements
+</script>
+</body>
+</html>
