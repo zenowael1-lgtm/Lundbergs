@@ -1448,3 +1448,2599 @@ observer.observe(el);
 </body>
 
 </html>
+
+  <!-- =========================
+LUXURY OVERLAY
+========================= -->
+
+<div id="loader">
+
+<div class="loader-logo">
+
+Lundbergs
+
+</div>
+
+</div>
+
+<div id="progress"></div>
+
+<div class="blob blob1"></div>
+<div class="blob blob2"></div>
+
+<button id="topButton">
+
+↑
+
+</button>
+
+<style>
+
+/* Grain */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+opacity:.05;
+
+background-image:
+radial-gradient(circle at 20% 20%,rgba(0,0,0,.15) 1px,transparent 1px),
+radial-gradient(circle at 80% 60%,rgba(0,0,0,.12) 1px,transparent 1px);
+
+background-size:22px 22px;
+
+z-index:-2;
+
+}
+
+/* Blurred background */
+
+.blob{
+
+position:fixed;
+
+width:520px;
+
+height:520px;
+
+border-radius:50%;
+
+filter:blur(120px);
+
+opacity:.18;
+
+z-index:-3;
+
+animation:floatBlob 18s ease-in-out infinite;
+
+}
+
+.blob1{
+
+background:#7A8D70;
+
+top:-150px;
+
+left:-120px;
+
+}
+
+.blob2{
+
+background:#D8C6AF;
+
+right:-120px;
+
+bottom:-120px;
+
+animation-delay:8s;
+
+}
+
+@keyframes floatBlob{
+
+0%{
+
+transform:translate(0,0);
+
+}
+
+50%{
+
+transform:translate(60px,-40px);
+
+}
+
+100%{
+
+transform:translate(0,0);
+
+}
+
+}
+
+/* Loader */
+
+#loader{
+
+position:fixed;
+
+inset:0;
+
+background:#FDFBF7;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:99999;
+
+transition:1s;
+
+}
+
+.loader-logo{
+
+font-family:"Playfair Display",serif;
+
+font-size:3rem;
+
+letter-spacing:-1px;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes pulse{
+
+50%{
+
+opacity:.45;
+
+}
+
+}
+
+/* Scroll progress */
+
+#progress{
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+height:3px;
+
+width:0;
+
+background:#607256;
+
+z-index:999999;
+
+}
+
+/* Top button */
+
+#topButton{
+
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:54px;
+
+height:54px;
+
+border:none;
+
+border-radius:50%;
+
+background:white;
+
+box-shadow:0 15px 45px rgba(0,0,0,.12);
+
+font-size:22px;
+
+cursor:pointer;
+
+opacity:0;
+
+transform:translateY(30px);
+
+transition:.4s;
+
+}
+
+#topButton.show{
+
+opacity:1;
+
+transform:none;
+
+}
+
+#topButton:hover{
+
+background:#607256;
+
+color:white;
+
+transform:translateY(-4px);
+
+}
+
+</style>
+
+<script>
+
+/* Loader */
+
+window.addEventListener("load",()=>{
+
+setTimeout(()=>{
+
+loader.style.opacity="0";
+
+setTimeout(()=>{
+
+loader.remove();
+
+},900);
+
+},700);
+
+});
+
+/* Progress */
+
+const progress=document.getElementById("progress");
+
+window.addEventListener("scroll",()=>{
+
+const h=document.documentElement;
+
+const sc=(h.scrollTop)/(h.scrollHeight-h.clientHeight);
+
+progress.style.width=(sc*100)+"%";
+
+});
+
+/* Top Button */
+
+const topButton=document.getElementById("topButton");
+
+window.addEventListener("scroll",()=>{
+
+if(scrollY>500){
+
+topButton.classList.add("show");
+
+}else{
+
+topButton.classList.remove("show");
+
+}
+
+});
+
+topButton.onclick=()=>{
+
+window.scrollTo({
+
+top:0,
+
+behavior:"smooth"
+
+});
+
+};
+
+/* Better Reveal */
+
+const reveal=new IntersectionObserver(entries=>{
+
+entries.forEach(entry=>{
+
+if(entry.isIntersecting){
+
+entry.target.animate([
+
+{
+
+opacity:0,
+
+transform:"translateY(70px) scale(.98)"
+
+},
+
+{
+
+opacity:1,
+
+transform:"translateY(0) scale(1)"
+
+}
+
+],{
+
+duration:900,
+
+fill:"forwards",
+
+easing:"cubic-bezier(.22,1,.36,1)"
+
+});
+
+reveal.unobserve(entry.target);
+
+}
+
+});
+
+});
+
+document.querySelectorAll("section,.menu-card,.feature,.hours-card").forEach(el=>{
+
+reveal.observe(el);
+
+});
+
+</script>
+
+  <!-- =========================
+LUXURY HERO V2
+========================= -->
+
+<section class="cinematic-hero">
+
+<video autoplay muted loop playsinline>
+
+<source src="https://player.vimeo.com/external/434045526.sd.mp4?s=41b47fbbf7dfd8af0ef6b26c84c5dd96d3d2cfbb&profile_id=165&oauth2_token_id=57447761" type="video/mp4">
+
+</video>
+
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+<div class="hero-rating">
+
+★★★★★
+
+<span>
+
+4.4 • 537 Google-recensioner
+
+</span>
+
+</div>
+
+<p class="hero-small">
+
+SEDAN 1946
+
+</p>
+
+<h1>
+
+Klassiskt fika.<br>
+
+Omsorg i varje detalj.
+
+</h1>
+
+<p class="hero-description">
+
+Mitt i Gröndal har Lundbergs Konditori varit en naturlig mötesplats i generationer.
+Här möts nybakat bröd, hantverkskaffe och klassiska bakverk i en lugn miljö.
+
+</p>
+
+<div class="hero-buttons">
+
+<a href="#meny" class="hero-btn">
+
+Utforska menyn
+
+</a>
+
+<a href="#oppet" class="hero-btn outline">
+
+Besök oss
+
+</a>
+
+</div>
+
+</div>
+
+<div class="scroll-indicator">
+
+<span></span>
+
+</div>
+
+</section>
+
+<style>
+
+.cinematic-hero{
+
+position:relative;
+
+height:100vh;
+
+overflow:hidden;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+color:white;
+
+}
+
+.cinematic-hero video{
+
+position:absolute;
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+z-index:-3;
+
+}
+
+.hero-overlay{
+
+position:absolute;
+
+inset:0;
+
+background:
+
+linear-gradient(to bottom,
+
+rgba(20,15,10,.30),
+
+rgba(20,15,10,.55));
+
+z-index:-2;
+
+}
+
+.hero-content{
+
+max-width:900px;
+
+padding:25px;
+
+text-align:center;
+
+animation:heroFade 1.4s ease;
+
+}
+
+.hero-small{
+
+letter-spacing:5px;
+
+font-size:.82rem;
+
+margin-bottom:18px;
+
+opacity:.85;
+
+}
+
+.hero-content h1{
+
+font-size:clamp(3.3rem,8vw,6rem);
+
+line-height:1.05;
+
+margin-bottom:28px;
+
+}
+
+.hero-description{
+
+font-size:1.15rem;
+
+max-width:700px;
+
+margin:auto;
+
+opacity:.93;
+
+}
+
+.hero-rating{
+
+display:inline-flex;
+
+gap:14px;
+
+align-items:center;
+
+padding:10px 18px;
+
+margin-bottom:32px;
+
+border-radius:999px;
+
+backdrop-filter:blur(14px);
+
+background:rgba(255,255,255,.12);
+
+border:1px solid rgba(255,255,255,.18);
+
+font-size:.95rem;
+
+}
+
+.hero-rating span{
+
+opacity:.9;
+
+}
+
+.hero-buttons{
+
+display:flex;
+
+justify-content:center;
+
+gap:18px;
+
+margin-top:45px;
+
+flex-wrap:wrap;
+
+}
+
+.hero-btn{
+
+padding:17px 34px;
+
+border-radius:999px;
+
+background:white;
+
+color:#2B1E17;
+
+text-decoration:none;
+
+font-weight:700;
+
+transition:.35s;
+
+}
+
+.hero-btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+.hero-btn.outline{
+
+background:transparent;
+
+border:1px solid rgba(255,255,255,.45);
+
+color:white;
+
+}
+
+.hero-btn.outline:hover{
+
+background:white;
+
+color:#2B1E17;
+
+}
+
+.scroll-indicator{
+
+position:absolute;
+
+bottom:40px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+}
+
+.scroll-indicator span{
+
+display:block;
+
+width:2px;
+
+height:55px;
+
+background:white;
+
+animation:scrollMove 1.8s infinite;
+
+opacity:.75;
+
+}
+
+@keyframes scrollMove{
+
+0%{
+
+transform:scaleY(.2);
+
+transform-origin:top;
+
+}
+
+50%{
+
+transform:scaleY(1);
+
+transform-origin:top;
+
+}
+
+100%{
+
+transform:scaleY(.2);
+
+transform-origin:bottom;
+
+}
+
+}
+
+@keyframes heroFade{
+
+from{
+
+opacity:0;
+
+transform:translateY(40px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+@media(max-width:800px){
+
+.hero-content h1{
+
+font-size:3.5rem;
+
+}
+
+.hero-description{
+
+font-size:1rem;
+
+}
+
+.hero-rating{
+
+font-size:.82rem;
+
+}
+
+}
+
+  </style>
+
+  <!-- =========================
+GOOGLE REVIEWS
+========================== -->
+
+<section id="reviews">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>OMDÖMEN</span>
+
+<h2>Det gästerna uppskattar mest.</h2>
+
+<p>
+
+En plats där människor återkommer för kaffet, bakverken och den varma
+atmosfären.
+
+</p>
+
+</div>
+
+<div class="review-grid">
+
+<div class="review">
+
+<div class="stars">
+
+★★★★★
+
+</div>
+
+<p>
+
+"Hjärtat av Gröndal. Fantastiska bullar och en härlig atmosfär."
+
+</p>
+
+<h4>Google-recension</h4>
+
+</div>
+
+<div class="review">
+
+<div class="stars">
+
+★★★★★
+
+</div>
+
+<p>
+
+"Mycket trevlig personal och riktigt gott kaffe. Ett av mina favoritcaféer."
+
+</p>
+
+<h4>Google-recension</h4>
+
+</div>
+
+<div class="review">
+
+<div class="stars">
+
+★★★★★
+
+</div>
+
+<p>
+
+"En klassisk pärla med nybakat bröd och fantastiska bakverk."
+
+</p>
+
+<h4>Google-recension</h4>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.review-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:28px;
+
+}
+
+.review{
+
+padding:36px;
+
+background:white;
+
+border-radius:28px;
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow);
+
+transition:.35s;
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+.review::before{
+
+content:"★★★★★";
+
+position:absolute;
+
+top:-18px;
+
+right:18px;
+
+font-size:5rem;
+
+opacity:.05;
+
+font-family:serif;
+
+}
+
+.review:hover{
+
+transform:translateY(-10px);
+
+}
+
+.stars{
+
+color:#D6A54A;
+
+font-size:1.2rem;
+
+margin-bottom:18px;
+
+letter-spacing:2px;
+
+}
+
+.review p{
+
+font-size:1rem;
+
+margin-bottom:22px;
+
+}
+
+.review h4{
+
+font-size:.9rem;
+
+opacity:.7;
+
+}
+
+@media(max-width:900px){
+
+.review-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+FEATURED FAVORITES
+========================== -->
+
+<section>
+
+<div class="container">
+
+<div class="section-title">
+
+<span>FAVORITER</span>
+
+<h2>Bakverk som gästerna återvänder för.</h2>
+
+</div>
+
+<div class="favorite-grid">
+
+<div class="favorite">
+
+<img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80">
+
+<div class="favorite-content">
+
+<h3>Kanelbullar</h3>
+
+<p>
+
+Mjuka, smöriga och nybakade varje morgon.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="favorite">
+
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80">
+
+<div class="favorite-content">
+
+<h3>Hantverkskaffe</h3>
+
+<p>
+
+Bryggt med omsorg för den perfekta fikastunden.
+
+</p>
+
+</div>
+
+</div>
+
+<div class="favorite">
+
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80">
+
+<div class="favorite-content">
+
+<h3>Prinsesstårta</h3>
+
+<p>
+
+En svensk klassiker med lätt grädde och marsipan.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.favorite-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:30px;
+
+}
+
+.favorite{
+
+overflow:hidden;
+
+background:white;
+
+border-radius:30px;
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow);
+
+transition:.45s;
+
+}
+
+.favorite:hover{
+
+transform:translateY(-10px);
+
+}
+
+.favorite img{
+
+width:100%;
+
+height:300px;
+
+object-fit:cover;
+
+transition:.8s;
+
+}
+
+.favorite:hover img{
+
+transform:scale(1.08);
+
+}
+
+.favorite-content{
+
+padding:28px;
+
+}
+
+.favorite h3{
+
+font-size:1.7rem;
+
+margin-bottom:14px;
+
+}
+
+@media(max-width:900px){
+
+.favorite-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+PARALLAX QUOTE
+========================== -->
+
+<section class="quote">
+
+<div class="quote-overlay"></div>
+
+<div class="container">
+
+<h2>
+
+"En riktigt bra fika handlar inte om att skynda –
+den handlar om att stanna upp."
+
+</h2>
+
+</div>
+
+</section>
+
+<style>
+
+.quote{
+
+position:relative;
+
+padding:180px 25px;
+
+background:url("https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?auto=format&fit=crop&w=1800&q=80") center/cover fixed;
+
+border-radius:40px;
+
+overflow:hidden;
+
+margin:120px auto;
+
+width:min(1200px,95%);
+
+}
+
+.quote-overlay{
+
+position:absolute;
+
+inset:0;
+
+background:rgba(25,20,16,.45);
+
+}
+
+.quote h2{
+
+position:relative;
+
+color:white;
+
+font-size:clamp(2rem,5vw,4rem);
+
+text-align:center;
+
+max-width:900px;
+
+margin:auto;
+
+line-height:1.3;
+
+}
+
+@media(max-width:800px){
+
+.quote{
+
+background-attachment:scroll;
+
+padding:120px 20px;
+
+}
+
+}
+
+</style>
+
+  <!-- =========================
+PREMIUM STATS
+========================= -->
+
+<section class="stats-section">
+
+<div class="container">
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2 data-count="1946">1946</h2>
+
+<p>Året då konditoriet öppnade.</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 data-count="500">500+</h2>
+
+<p>Offentliga kundomdömen.</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>4.4 ★</h2>
+
+<p>Genomsnittligt betyg.</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2>Varje dag</h2>
+
+<p>Nybakat bröd och färska bakverk.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.stats-section{
+
+padding:110px 22px;
+
+}
+
+.stats-grid{
+
+display:grid;
+
+grid-template-columns:repeat(4,1fr);
+
+gap:25px;
+
+}
+
+.stat-card{
+
+background:white;
+
+border:1px solid var(--border);
+
+border-radius:28px;
+
+padding:45px;
+
+text-align:center;
+
+box-shadow:var(--shadow);
+
+transition:.35s;
+
+}
+
+.stat-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.stat-card h2{
+
+font-size:3rem;
+
+margin-bottom:10px;
+
+color:var(--accent);
+
+}
+
+@media(max-width:900px){
+
+.stats-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+@media(max-width:600px){
+
+.stats-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+EDITORIAL GALLERY
+========================= -->
+
+<section class="editorial-gallery">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>GALLERI</span>
+
+<h2>Smaker, dofter och ögonblick.</h2>
+
+</div>
+
+<div class="masonry">
+
+<div class="masonry-item tall">
+
+<img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+<div class="masonry-item">
+
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+<div class="masonry-item">
+
+<img src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+<div class="masonry-item wide">
+
+<img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+<div class="masonry-item">
+
+<img src="https://images.unsplash.com/photo-1521302080334-4bebac2763a6?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+<div class="masonry-item">
+
+<img src="https://images.unsplash.com/photo-1483695028939-5bb13f8648b0?auto=format&fit=crop&w=1200&q=80">
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.masonry{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+grid-auto-rows:240px;
+
+gap:22px;
+
+}
+
+.masonry-item{
+
+overflow:hidden;
+
+border-radius:24px;
+
+position:relative;
+
+box-shadow:var(--shadow);
+
+}
+
+.masonry-item img{
+
+width:100%;
+
+height:100%;
+
+object-fit:cover;
+
+transition:1s;
+
+}
+
+.masonry-item:hover img{
+
+transform:scale(1.08);
+
+}
+
+.tall{
+
+grid-row:span 2;
+
+}
+
+.wide{
+
+grid-column:span 2;
+
+}
+
+@media(max-width:900px){
+
+.masonry{
+
+grid-template-columns:1fr;
+
+grid-auto-rows:260px;
+
+}
+
+.tall,
+
+.wide{
+
+grid-row:auto;
+
+grid-column:auto;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+NEWSLETTER
+========================= -->
+
+<section class="newsletter">
+
+<div class="container">
+
+<div class="newsletter-box">
+
+<h2>Få nyheter från bageriet.</h2>
+
+<p>
+
+Säsongens bakverk, nyheter och inspiration direkt till din inkorg.
+
+</p>
+
+<div class="newsletter-form">
+
+<input type="email" placeholder="Din e-postadress">
+
+<button>Prenumerera</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.newsletter{
+
+padding:120px 22px;
+
+}
+
+.newsletter-box{
+
+background:linear-gradient(135deg,#607256,#7E9275);
+
+padding:70px;
+
+border-radius:34px;
+
+text-align:center;
+
+color:white;
+
+}
+
+.newsletter-box h2{
+
+font-size:3rem;
+
+margin-bottom:20px;
+
+}
+
+.newsletter-box p{
+
+color:rgba(255,255,255,.85);
+
+margin-bottom:35px;
+
+}
+
+.newsletter-form{
+
+display:flex;
+
+gap:16px;
+
+max-width:650px;
+
+margin:auto;
+
+}
+
+.newsletter-form input{
+
+flex:1;
+
+padding:18px;
+
+border:none;
+
+border-radius:999px;
+
+}
+
+.newsletter-form button{
+
+padding:18px 34px;
+
+border:none;
+
+background:white;
+
+color:#2B1E17;
+
+border-radius:999px;
+
+font-weight:700;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.newsletter-form button:hover{
+
+transform:translateY(-3px);
+
+}
+
+@media(max-width:700px){
+
+.newsletter-box{
+
+padding:40px 25px;
+
+}
+
+.newsletter-box h2{
+
+font-size:2.2rem;
+
+}
+
+.newsletter-form{
+
+flex-direction:column;
+
+}
+
+}
+
+</style>
+
+  <!-- =========================
+CHEF'S SELECTION
+========================= -->
+
+<section class="chef-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>REKOMMENDERAT</span>
+
+<h2>Dagens favoriter.</h2>
+
+<p>Våra mest uppskattade bakverk och drycker.</p>
+
+</div>
+
+<div class="chef-grid">
+
+<div class="chef-card">
+
+<img src="https://images.unsplash.com/photo-1486427944299-d1955d23e34d?auto=format&fit=crop&w=1200&q=80">
+
+<div class="chef-info">
+
+<h3>Kanelbulle</h3>
+
+<p>Smörig, luftig och nybakad varje morgon.</p>
+
+<div class="price-row">
+
+<span>39 kr</span>
+
+<button>Beställ</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chef-card">
+
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80">
+
+<div class="chef-info">
+
+<h3>Cappuccino</h3>
+
+<p>Len mjölk och fyllig espresso.</p>
+
+<div class="price-row">
+
+<span>45 kr</span>
+
+<button>Beställ</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="chef-card">
+
+<img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=1200&q=80">
+
+<div class="chef-info">
+
+<h3>Prinsesstårta</h3>
+
+<p>En svensk klassiker med marsipan.</p>
+
+<div class="price-row">
+
+<span>65 kr</span>
+
+<button>Beställ</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.chef-section{
+
+padding:120px 22px;
+
+}
+
+.chef-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:32px;
+
+}
+
+.chef-card{
+
+background:white;
+
+border-radius:28px;
+
+overflow:hidden;
+
+border:1px solid var(--border);
+
+box-shadow:var(--shadow);
+
+transition:.45s;
+
+}
+
+.chef-card:hover{
+
+transform:translateY(-12px);
+
+}
+
+.chef-card img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+transition:1s;
+
+}
+
+.chef-card:hover img{
+
+transform:scale(1.07);
+
+}
+
+.chef-info{
+
+padding:28px;
+
+}
+
+.chef-info h3{
+
+margin-bottom:12px;
+
+font-size:1.8rem;
+
+}
+
+.price-row{
+
+margin-top:25px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+.price-row span{
+
+font-weight:700;
+
+font-size:1.2rem;
+
+color:var(--accent);
+
+}
+
+.price-row button{
+
+padding:12px 24px;
+
+border:none;
+
+background:var(--accent);
+
+color:white;
+
+border-radius:999px;
+
+cursor:pointer;
+
+transition:.35s;
+
+}
+
+.price-row button:hover{
+
+transform:translateY(-3px);
+
+}
+
+@media(max-width:900px){
+
+.chef-grid{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+MARQUEE
+========================= -->
+
+<section class="marquee-section">
+
+<div class="marquee">
+
+<span>
+
+☕ Nybakat varje morgon ✦ Färska bullar ✦ Hantverkskaffe ✦ Klassiskt konditori ✦ Sedan 1946 ✦ Gröndal ✦
+
+</span>
+
+<span>
+
+☕ Nybakat varje morgon ✦ Färska bullar ✦ Hantverkskaffe ✦ Klassiskt konditori ✦ Sedan 1946 ✦ Gröndal ✦
+
+</span>
+
+</div>
+
+</section>
+
+<style>
+
+.marquee-section{
+
+overflow:hidden;
+
+padding:30px 0;
+
+border-top:1px solid var(--border);
+
+border-bottom:1px solid var(--border);
+
+margin:100px 0;
+
+}
+
+.marquee{
+
+display:flex;
+
+width:max-content;
+
+animation:marqueeMove 25s linear infinite;
+
+}
+
+.marquee span{
+
+font-family:"Playfair Display",serif;
+
+font-size:2rem;
+
+padding-right:70px;
+
+white-space:nowrap;
+
+color:#4B3A30;
+
+}
+
+@keyframes marqueeMove{
+
+from{
+
+transform:translateX(0);
+
+}
+
+to{
+
+transform:translateX(-50%);
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+FLOATING COFFEE
+========================= -->
+
+<div class="coffee coffee1">☕</div>
+
+<div class="coffee coffee2">🥐</div>
+
+<div class="coffee coffee3">🍞</div>
+
+<style>
+
+.coffee{
+
+position:fixed;
+
+font-size:34px;
+
+opacity:.08;
+
+pointer-events:none;
+
+animation:floatCoffee 14s ease-in-out infinite;
+
+z-index:-1;
+
+}
+
+.coffee1{
+
+left:5%;
+
+top:30%;
+
+}
+
+.coffee2{
+
+right:7%;
+
+top:60%;
+
+animation-delay:5s;
+
+}
+
+.coffee3{
+
+left:85%;
+
+top:18%;
+
+animation-delay:9s;
+
+}
+
+@keyframes floatCoffee{
+
+0%{
+
+transform:translateY(0px) rotate(0deg);
+
+}
+
+50%{
+
+transform:translateY(-40px) rotate(10deg);
+
+}
+
+100%{
+
+transform:translateY(0px) rotate(0deg);
+
+}
+
+}
+
+</style>
+
+  <!-- =========================
+INSTAGRAM STYLE GALLERY
+========================= -->
+
+<section class="instagram">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>GALLERI</span>
+
+<h2>En inblick i vardagen på konditoriet.</h2>
+
+</div>
+
+<div class="instagram-grid">
+
+<div><img src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=900&q=80"></div>
+
+<div><img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"></div>
+
+<div><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80"></div>
+
+<div><img src="https://images.unsplash.com/photo-1521302080334-4bebac2763a6?auto=format&fit=crop&w=900&q=80"></div>
+
+<div><img src="https://images.unsplash.com/photo-1551024601-bec78aea704b?auto=format&fit=crop&w=900&q=80"></div>
+
+<div><img src="https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?auto=format&fit=crop&w=900&q=80"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.instagram{
+
+padding:120px 22px;
+
+}
+
+.instagram-grid{
+
+display:grid;
+
+grid-template-columns:repeat(3,1fr);
+
+gap:18px;
+
+}
+
+.instagram-grid div{
+
+overflow:hidden;
+
+border-radius:22px;
+
+}
+
+.instagram-grid img{
+
+width:100%;
+
+height:320px;
+
+object-fit:cover;
+
+transition:.8s;
+
+}
+
+.instagram-grid img:hover{
+
+transform:scale(1.08);
+
+}
+
+@media(max-width:800px){
+
+.instagram-grid{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+MAP
+========================= -->
+
+<section class="map-section">
+
+<div class="container">
+
+<div class="section-title">
+
+<span>HITTA HIT</span>
+
+<h2>Sjöbjörnsvägen 2, Gröndal</h2>
+
+</div>
+
+<div class="map-card">
+
+<iframe
+src="https://www.google.com/maps?q=Sjöbjörnsvägen+2+Stockholm&output=embed"
+loading="lazy"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</div>
+
+</section>
+
+<style>
+
+.map-card{
+
+overflow:hidden;
+
+border-radius:30px;
+
+box-shadow:var(--shadow);
+
+border:1px solid var(--border);
+
+}
+
+.map-card iframe{
+
+width:100%;
+
+height:500px;
+
+border:none;
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+IMAGE LIGHTBOX
+========================= -->
+
+<div id="lightbox">
+
+<span id="closeLightbox">×</span>
+
+<img id="lightboxImage">
+
+</div>
+
+<style>
+
+#lightbox{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.92);
+
+display:none;
+
+align-items:center;
+
+justify-content:center;
+
+z-index:99999;
+
+}
+
+#lightbox img{
+
+max-width:92%;
+
+max-height:90%;
+
+border-radius:18px;
+
+}
+
+#closeLightbox{
+
+position:absolute;
+
+top:25px;
+
+right:35px;
+
+font-size:55px;
+
+color:white;
+
+cursor:pointer;
+
+font-family:sans-serif;
+
+}
+
+</style>
+
+<script>
+
+const galleryImages=document.querySelectorAll(".instagram-grid img,.masonry img,.gallery img");
+
+const lightbox=document.getElementById("lightbox");
+
+const lightboxImage=document.getElementById("lightboxImage");
+
+const closeLightbox=document.getElementById("closeLightbox");
+
+galleryImages.forEach(img=>{
+
+img.onclick=()=>{
+
+lightbox.style.display="flex";
+
+lightboxImage.src=img.src;
+
+}
+
+});
+
+closeLightbox.onclick=()=>{
+
+lightbox.style.display="none";
+
+};
+
+lightbox.onclick=e=>{
+
+if(e.target===lightbox){
+
+lightbox.style.display="none";
+
+}
+
+};
+
+</script>
+
+  <!-- =========================
+PREMIUM CURSOR
+========================= -->
+
+<div class="cursor"></div>
+
+<style>
+
+@media (pointer:fine){
+
+*{
+cursor:none;
+}
+
+.cursor{
+
+width:18px;
+height:18px;
+
+border-radius:50%;
+
+position:fixed;
+
+left:0;
+top:0;
+
+background:rgba(96,114,86,.25);
+
+backdrop-filter:blur(5px);
+
+border:1px solid rgba(96,114,86,.4);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+
+transition:
+width .25s,
+height .25s,
+background .25s;
+
+z-index:999999;
+
+}
+
+.cursor.active{
+
+width:50px;
+height:50px;
+
+background:rgba(96,114,86,.12);
+
+}
+
+}
+
+</style>
+
+<script>
+
+const cursor=document.querySelector(".cursor");
+
+if(cursor){
+
+window.addEventListener("mousemove",e=>{
+
+cursor.style.left=e.clientX+"px";
+
+cursor.style.top=e.clientY+"px";
+
+});
+
+document.querySelectorAll("a,button,.chef-card,.menu-card,.review").forEach(el=>{
+
+el.addEventListener("mouseenter",()=>cursor.classList.add("active"));
+
+el.addEventListener("mouseleave",()=>cursor.classList.remove("active"));
+
+});
+
+}
+
+</script>
+
+
+
+
+
+
+
+<!-- =========================
+FLOATING STEAM
+========================= -->
+
+<div class="steam steam1"></div>
+<div class="steam steam2"></div>
+<div class="steam steam3"></div>
+
+<style>
+
+.steam{
+
+position:fixed;
+
+bottom:-80px;
+
+width:220px;
+
+height:220px;
+
+background:radial-gradient(circle,rgba(255,255,255,.55),transparent 70%);
+
+filter:blur(45px);
+
+opacity:.22;
+
+pointer-events:none;
+
+animation:steam 14s linear infinite;
+
+z-index:-2;
+
+}
+
+.steam1{
+
+left:12%;
+
+}
+
+.steam2{
+
+left:50%;
+
+animation-delay:5s;
+
+}
+
+.steam3{
+
+right:10%;
+
+animation-delay:9s;
+
+}
+
+@keyframes steam{
+
+0%{
+
+transform:translateY(0) scale(.4);
+
+opacity:0;
+
+}
+
+20%{
+
+opacity:.18;
+
+}
+
+100%{
+
+transform:translateY(-900px) scale(1.8);
+
+opacity:0;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+SCROLL DOWN ICON
+========================= -->
+
+<div id="scrollCircle">
+
+↓
+
+</div>
+
+<style>
+
+#scrollCircle{
+
+position:fixed;
+
+right:22px;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:52px;
+
+height:52px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+border-radius:50%;
+
+background:white;
+
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+
+font-size:22px;
+
+opacity:.75;
+
+transition:.35s;
+
+}
+
+#scrollCircle:hover{
+
+transform:translateY(-50%) scale(1.1);
+
+opacity:1;
+
+}
+
+@media(max-width:900px){
+
+#scrollCircle{
+
+display:none;
+
+}
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+SECTION DIVIDER
+========================= -->
+
+<style>
+
+.wave-divider{
+
+height:120px;
+
+background:
+radial-gradient(circle at 50% 0%,transparent 68%,#FDFBF7 69%) center top/200px 120px repeat-x;
+
+margin-top:-1px;
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+SMOOTH BUTTON GLOW
+========================= -->
+
+<style>
+
+button,
+.hero-btn,
+.button,
+.map-btn{
+
+position:relative;
+
+overflow:hidden;
+
+}
+
+button::after,
+.hero-btn::after,
+.button::after,
+.map-btn::after{
+
+content:"";
+
+position:absolute;
+
+left:-150%;
+
+top:0;
+
+width:60%;
+
+height:100%;
+
+background:
+
+linear-gradient(90deg,
+
+transparent,
+
+rgba(255,255,255,.65),
+
+transparent);
+
+transform:skewX(-20deg);
+
+}
+
+button:hover::after,
+.hero-btn:hover::after,
+.button:hover::after,
+.map-btn:hover::after{
+
+left:180%;
+
+transition:1.1s;
+
+}
+
+</style>
+
+
+
+
+
+
+
+<!-- =========================
+PAGE FADE
+========================= -->
+
+<style>
+
+body{
+
+animation:pageIn 1.2s ease;
+
+}
+
+@keyframes pageIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+</style>
