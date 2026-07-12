@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lundbergs Konditori | Gröndal</title>
+
+<style>
+:root{
+    --bg:#f7f2ea;
+    --card:#fffdf9;
+    --primary:#5f4633;
+    --secondary:#6f8664;
+    --accent:#d6b58a;
+    --text:#2d2d2d;
+    --shadow:0 12px 35px rgba(0,0,0,.08);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+}
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    backdrop-filter:blur(14px);
+    background:rgba(247,242,234,.92);
+    border-bottom:1px solid rgba(0,0,0,.05);
+    z-index:1000;
+}
+
+nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 24px;
+}
+
+.logo{
+    font-size:1.5rem;
+    font-weight:700;
+    color:var(--primary);
+    letter-spacing:.5px;
+}
+
+nav ul{
+    display:flex;
+    gap:28px;
+    list-style:none;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    font-weight:500;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--secondary);
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:120px 20px;
+    background:
+    linear-gradient(rgba(247,242,234,.55),rgba(247,242,234,.88)),
+    url("https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1600&q=80") center/cover;
+}
+
+.hero h1{
+    font-size:clamp(2.8rem,6vw,5rem);
+    color:var(--primary);
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:650px;
+    margin:auto;
+    font-size:1.15rem;
+}
+
+.btn{
+    display:inline-block;
+    margin-top:35px;
+    background:var(--secondary);
+    color:white;
+    text-decoration:none;
+    padding:14px 30px;
+    border-radius:40px;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    background:#5d7455;
+}
+
+section{
+    max-width:1150px;
+    margin:auto;
+    padding:90px 20px;
+}
+
+h2{
+    color:var(--primary);
+    font-size:2rem;
+    margin-bottom:30px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:var(--card);
+    border-radius:18px;
+    padding:30px;
+    box-shadow:var(--shadow);
+}
+
+.menu-item{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px dashed #ddd;
+}
+
+.menu-item:last-child{
+    border:none;
+}
+
+.about{
+    background:var(--card);
+    border-radius:20px;
+    box-shadow:var(--shadow);
+    padding:40px;
+}
+
+form{
+    display:grid;
+    gap:18px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:16px;
+    border-radius:12px;
+    border:1px solid #ddd;
+    background:white;
+    font-size:1rem;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+button{
+    border:none;
+    background:var(--secondary);
+    color:white;
+    padding:15px;
+    border-radius:12px;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.3s;
+}
+
+button:hover{
+    background:#5b7153;
+}
+
+footer{
+    background:var(--primary);
+    color:white;
+    text-align:center;
+    padding:35px 20px;
+}
+
+@media(max-width:700px){
+
+nav{
+flex-direction:column;
+gap:15px;
+}
+
+nav ul{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+}
+</style>
+
+</head>
+<body>
+
+<header>
+
+<nav>
+
+<div class="logo">Lundbergs Konditori</div>
+
+<ul>
+<li><a href="#hem">Hem</a></li>
+<li><a href="#oppet">Öppettider</a></li>
+<li><a href="#meny">Meny</a></li>
+<li><a href="#om">Om oss</a></li>
+<li><a href="#kontakt">Kontakt</a></li>
+</ul>
+
+</nav>
+
+</header>
+
+<section class="hero" id="hem">
+
+<div>
+
+<h1>Klassiskt fika i hjärtat av Gröndal</h1>
+
+<p>
+Sedan 1940-talet har Lundbergs Konditori varit en självklar mötesplats för grannar,
+familjer och alla som uppskattar nybakat bröd, riktigt gott kaffe och ett lugnt café där
+man gärna stannar en stund extra.
+</p>
+
+<a class="btn" href="#meny">Se vår meny</a>
+
+</div>
+
+</section>
+
+<section id="oppet">
+
+<h2>Öppettider & Adress</h2>
+
+<div class="grid">
+
+<div class="card">
+<h3>Öppettider</h3>
+<p><strong>Måndag–Fredag</strong><br>07.00–18.00</p>
+<br>
+<p><strong>Lördag</strong><br>08.00–17.00</p>
+<br>
+<p><strong>Söndag</strong><br>09.00–16.00</p>
+</div>
+
+<div class="card">
+<h3>Besök oss</h3>
+<p>
+Sjöbjörnsvägen 2<br>
+117 67 Gröndal<br>
+Stockholm
+</p>
+<br>
+<p>
+Välkommen in för frukost, lunch eller en klassisk eftermiddagsfika.
+</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="meny">
+
+<h2>Meny</h2>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>Kaffe</h3>
+
+<div class="menu-item"><span>Bryggkaffe</span><span>35 kr</span></div>
+<div class="menu-item"><span>Cappuccino</span><span>45 kr</span></div>
+<div class="menu-item"><span>Latte</span><span>49 kr</span></div>
+
+</div>
+
+<div class="card">
+
+<h3>Bullar</h3>
+
+<div class="menu-item"><span>Kanelbulle</span><span>39 kr</span></div>
+<div class="menu-item"><span>Kardemummabulle</span><span>39 kr</span></div>
+<div class="menu-item"><span>Vaniljbulle</span><span>42 kr</span></div>
+
+</div>
+
+<div class="card">
+
+<h3>Tårtor</h3>
+
+<div class="menu-item"><span>Prinsesstårta</span><span>65 kr</span></div>
+<div class="menu-item"><span>Chokladtårta</span><span>69 kr</span></div>
+<div class="menu-item"><span>Budapestbakelse</span><span>59 kr</span></div>
+
+</div>
+
+<div class="card">
+
+<h3>Smörgåsar</h3>
+
+<div class="menu-item"><span>Räksmörgås</span><span>99 kr</span></div>
+<div class="menu-item"><span>Ost & Skinka</span><span>69 kr</span></div>
+<div class="menu-item"><span>Fralla med ost</span><span>45 kr</span></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="om">
+
+<h2>Om oss</h2>
+
+<div class="about">
+
+<p>
+Lundbergs Konditori har varit en del av Gröndal sedan 1940-talet. Här möts tradition och
+vardag i en miljö där doften av nygräddade bullar och nybryggt kaffe fortfarande sätter
+tonen för dagen.
+</p>
+
+<br>
+
+<p>
+Vi bakar med omsorg och använder klassiska recept som fått följa med genom generationer.
+Oavsett om du kommer för en snabb kopp kaffe eller en lång fikastund hoppas vi att du ska
+känna dig lika välkommen varje gång du kliver in genom dörren.
+</p>
+
+</div>
+
+</section>
+
+<section id="kontakt">
+
+<h2>Kontakta oss</h2>
+
+<div class="card">
+
+<form>
+
+<input type="text" placeholder="Namn">
+
+<input type="email" placeholder="E-post">
+
+<textarea placeholder="Skriv ditt meddelande..."></textarea>
+
+<button type="submit">Skicka meddelande</button>
+
+</form>
+
+</div>
+
+</section>
+
+<footer>
+
+<p>© 2025 Lundbergs Konditori • Sjöbjörnsvägen 2 • Gröndal, Stockholm</p>
+
+</footer>
+
+</body>
+</html>
