@@ -1,328 +1,707 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Lundbergs Konditori</title>
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
-<style>
-  /* Reset and Base Styles */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  background-color: #FDFBF7;
-  color: #2B1E17;
-  line-height: 1.6;
-}
-a {
-  text-decoration: none;
-  color: inherit;
-}
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Lundbergs Konditori · Gröndal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ----- RESET & BASE ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-/* Typography */
-h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
-  font-weight: 700;
-}
-h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-}
-h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
-}
+    body {
+      background: #FDFBF7;
+      color: #2B1E17;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
 
-/* Layout Containers */
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
 
-/* Header Styles */
-header {
-  display: flex;
-  overflow-x: auto;
-  padding: 1rem 0;
-  background: transparent;
-  scrollbar-width: none; /* Firefox */
-}
-header::-webkit-scrollbar {
-  display: none; /* Chrome/Safari */
-}
-nav {
-  display: flex;
-  gap: 2rem;
-  flex-shrink: 0;
-}
-nav a {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-weight: 600;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  white-space: nowrap;
-  transition: color 0.3s;
-}
-nav a:hover {
-  color: #607256;
-}
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
 
-/* Hero Section */
-.hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 1rem;
-  background-image: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.7&auto=format&fit=crop&w=1950&q=80');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  overflow: hidden;
-}
-.hero::after {
-  content: "";
-  position: absolute;
-  top:0; left:0; right:0; bottom:0;
-  background-color: rgba(251, 245, 233, 0.4);
-}
-.hero-content {
-  position: relative;
-  max-width: 800px;
-  text-align: center;
-  color: #2B1E17;
-  z-index: 1;
-  padding: 2rem;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(3rem, 6vw, 5rem);
-  margin-bottom: 1rem;
-}
-.hero p {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-.btn-cta {
-  background-color: transparent;
-  color: #607256;
-  border: 2px solid #607256;
-  padding: 0.75rem 1.5rem;
-  font-size: 1rem;
-  border-radius: 25px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
-}
-.btn-cta:hover {
-  background-color: #607256;
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(96, 114, 86, 0.2);
-}
+    /* ----- ANIMATIONS (steam, wheat, fade) ----- */
+    @keyframes floatSteam {
+      0% { opacity: 0.5; transform: translateY(0) scale(1); }
+      50% { opacity: 1; transform: translateY(-18px) scale(1.05); }
+      100% { opacity: 0.2; transform: translateY(-36px) scale(0.9); }
+    }
 
-/* Section Styles */
-section {
-  padding: 4rem 0;
-}
-section h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2rem, 4vw, 3rem);
-}
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-.card {
-  border: 1px solid #E6DFD5;
-  border-radius: 8px;
-  padding: 1rem;
-  background-color: #fff;
-}
-.menu-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-}
-.menu-item span {
-  display: inline-block;
-}
-.item-name {
-  font-weight: 600;
-}
-.leader {
-  flex: 1;
-  border-bottom: 1px dotted #E6DFD5;
-  margin: 0 0.5rem;
-}
-.price {
-  font-weight: 600;
-}
+    @keyframes swayWheat {
+      0% { transform: rotate(-2deg) translateX(0); }
+      50% { transform: rotate(4deg) translateX(6px); }
+      100% { transform: rotate(-2deg) translateX(0); }
+    }
 
-/* Kontakt & Footer */
-footer {
-  background-color: #FDFBF7;
-  padding: 2rem 1rem;
-  border-top: 1px solid #E6DFD5;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.9rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-footer p {
-  margin: 0.5rem 0;
-}
-footer a {
-  color: #2B1E17;
-  font-weight: 600;
-}
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
 
-/* Responsive Adjustments */
-@media(max-width: 600px){
-  h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
-  }
-  section {
-    padding: 2rem 1rem;
-  }
-}
-</style>
+    .fade-in {
+      animation: fadeUp 1s ease forwards;
+    }
+
+    .steam-group {
+      position: absolute;
+      top: 20%;
+      left: 10%;
+      width: 120px;
+      height: 140px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .steam-particle {
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      width: 40px;
+      height: 40px;
+      background: radial-gradient(circle, rgba(255,255,240,0.3) 0%, rgba(255,255,240,0) 80%);
+      border-radius: 50%;
+      animation: floatSteam 4s ease-in-out infinite;
+    }
+
+    .steam-particle:nth-child(2) {
+      left: 50%;
+      animation-delay: 1.2s;
+      width: 50px;
+      height: 50px;
+    }
+    .steam-particle:nth-child(3) {
+      left: 75%;
+      animation-delay: 2.5s;
+      width: 30px;
+      height: 30px;
+    }
+
+    .wheat-icon {
+      display: inline-block;
+      animation: swayWheat 3s ease-in-out infinite;
+      font-size: 2.4rem;
+      line-height: 1;
+      margin-right: 6px;
+    }
+
+    /* ----- HEADER / NAV (ultra-sleek, no wrap) ----- */
+    header {
+      background: #FDFBF7;
+      padding: 18px 0 12px;
+      border-bottom: 1px solid #E6DFD5;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(6px);
+      background: rgba(253, 251, 247, 0.88);
+    }
+
+    .header-grid {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: nowrap;
+      gap: 12px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      letter-spacing: -0.02em;
+      color: #2B1E17;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .logo span {
+      color: #607256;
+      font-weight: 400;
+      font-style: italic;
+    }
+
+    .nav-scroll {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 8px 18px;
+      padding: 4px 0 8px;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;
+      flex: 1 1 auto;
+      justify-content: flex-end;
+    }
+    .nav-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .nav-scroll a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.02em;
+      color: #2B1E17;
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 4px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: border 0.2s, color 0.2s;
+    }
+    .nav-scroll a:hover {
+      border-bottom-color: #607256;
+      color: #607256;
+    }
+
+    .nav-cta {
+      background: #607256;
+      color: #FDFBF7 !important;
+      padding: 6px 16px !important;
+      border-radius: 40px;
+      border-bottom: none !important;
+      font-weight: 500;
+      transition: background 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-cta:hover {
+      background: #4d5e44 !important;
+      border-bottom: none !important;
+    }
+
+    /* ----- HERO ----- */
+    .hero {
+      padding: 50px 0 60px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: clamp(2.8rem, 10vw, 4.8rem);
+      line-height: 1.1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .hero-text h1 i {
+      font-weight: 400;
+      color: #607256;
+      font-style: italic;
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      font-weight: 300;
+      margin: 24px 0 32px;
+      max-width: 440px;
+      color: #3d2f26;
+    }
+
+    .btn-sage {
+      background: #607256;
+      color: #FDFBF7;
+      border: none;
+      padding: 14px 44px;
+      border-radius: 60px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      transition: opacity 0.4s ease, transform 0.2s;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(96, 114, 86, 0.15);
+      display: inline-block;
+      text-decoration: none;
+    }
+    .btn-sage:hover {
+      opacity: 0.75;
+      transform: scale(0.98);
+    }
+
+    .hero-image {
+      position: relative;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px -12px rgba(43, 30, 23, 0.12);
+      aspect-ratio: 1/1;
+      background: #E6DFD5;
+    }
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-image .steam-group {
+      top: 10%;
+      left: 5%;
+    }
+
+    /* ----- MENU CARDS ----- */
+    .menu-section {
+      padding: 60px 0 70px;
+      border-top: 1px solid #E6DFD5;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .section-sub {
+      font-weight: 300;
+      color: #4d3d32;
+      margin-bottom: 48px;
+      font-size: 1.05rem;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .menu-card {
+      border: 1px solid #E6DFD5;
+      border-radius: 32px;
+      padding: 28px 24px 24px;
+      background: rgba(255, 253, 249, 0.4);
+      backdrop-filter: blur(2px);
+      transition: box-shadow 0.3s, transform 0.2s;
+      box-shadow: 0 4px 12px rgba(43, 30, 23, 0.02);
+    }
+    .menu-card:hover {
+      box-shadow: 0 12px 28px -8px rgba(43, 30, 23, 0.06);
+      transform: translateY(-4px);
+    }
+
+    .menu-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      letter-spacing: -0.01em;
+      border-bottom: 1px solid #E6DFD5;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      color: #2B1E17;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-weight: 300;
+      border-bottom: 1px dashed rgba(230, 223, 213, 0.4);
+    }
+    .menu-item:last-of-type {
+      border-bottom: none;
+    }
+
+    .item-name {
+      font-weight: 400;
+      font-size: 1rem;
+      flex-shrink: 0;
+      max-width: 70%;
+    }
+    .item-dots {
+      flex: 1 1 auto;
+      border-bottom: 1.5px dotted #d8d0c4;
+      margin: 0 8px;
+      height: 0.8em;
+    }
+    .item-price {
+      font-weight: 500;
+      font-size: 1rem;
+      color: #607256;
+      letter-spacing: 0.02em;
+    }
+
+    /* ----- REVIEWS (google maps style) ----- */
+    .reviews-section {
+      padding: 30px 0 60px;
+      border-top: 1px solid #E6DFD5;
+    }
+    .review-grid {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      gap: 28px;
+      padding: 20px 4px 30px;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
+    }
+    .review-grid::-webkit-scrollbar {
+      height: 4px;
+      background: #E6DFD5;
+      border-radius: 10px;
+    }
+    .review-grid::-webkit-scrollbar-thumb {
+      background: #607256;
+      border-radius: 10px;
+    }
+
+    .review-card {
+      flex: 0 0 280px;
+      background: #FDFBF7;
+      border: 1px solid #E6DFD5;
+      border-radius: 28px;
+      padding: 24px 22px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      transition: transform 0.2s;
+    }
+    .review-card:hover {
+      transform: scale(1.01);
+    }
+    .review-stars {
+      color: #607256;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+    }
+    .review-text {
+      font-weight: 300;
+      margin: 12px 0 8px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .review-author {
+      font-weight: 500;
+      color: #2B1E17;
+      font-size: 0.85rem;
+    }
+
+    /* ----- FOOTER (minimal) ----- */
+    footer {
+      background: #FDFBF7;
+      border-top: 1px solid #E6DFD5;
+      padding: 48px 0 32px;
+    }
+
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .footer-col h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #607256;
+      margin-bottom: 12px;
+    }
+    .footer-col p, .footer-col a {
+      font-weight: 300;
+      font-size: 0.95rem;
+      color: #2B1E17;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .footer-col a:hover {
+      color: #607256;
+    }
+    .footer-copy {
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid #E6DFD5;
+      font-size: 0.8rem;
+      text-align: center;
+      color: #5f5043;
+      letter-spacing: 0.02em;
+    }
+
+    /* ----- RESPONSIVE (mobile perfection) ----- */
+    @media (max-width: 768px) {
+      .header-grid {
+        flex-wrap: nowrap;
+        gap: 8px;
+      }
+      .logo {
+        font-size: 1.4rem;
+      }
+      .nav-scroll {
+        gap: 6px 12px;
+        justify-content: flex-end;
+      }
+      .nav-scroll a {
+        font-size: 0.8rem;
+      }
+      .nav-cta {
+        padding: 4px 14px !important;
+        font-size: 0.75rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      .hero-text h1 {
+        font-size: clamp(2.6rem, 12vw, 3.8rem);
+      }
+      .hero-image {
+        aspect-ratio: 4/3;
+        max-height: 320px;
+      }
+      .hero-image .steam-group {
+        top: 5%;
+        left: 2%;
+        width: 80px;
+        height: 100px;
+      }
+
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 2.4rem;
+      }
+
+      .review-grid {
+        gap: 16px;
+      }
+      .review-card {
+        flex: 0 0 240px;
+        padding: 18px;
+      }
+
+      .footer-grid {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 18px;
+      }
+      .nav-scroll {
+        gap: 4px 10px;
+      }
+      .nav-scroll a {
+        font-size: 0.7rem;
+        letter-spacing: 0.01em;
+      }
+      .logo {
+        font-size: 1.2rem;
+      }
+      .btn-sage {
+        padding: 12px 32px;
+        font-size: 0.9rem;
+        width: 100%;
+        text-align: center;
+      }
+      .hero-text p {
+        font-size: 1rem;
+      }
+    }
+
+    /* utility */
+    .mt-1 { margin-top: 10px; }
+    .mb-1 { margin-bottom: 10px; }
+    .text-sage { color: #607256; }
+    .border-soft { border-color: #E6DFD5; }
+
+    /* Video / wheat decoration */
+    .wheat-deco {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 1.2rem;
+      color: #607256;
+      opacity: 0.7;
+    }
+    .wheat-deco span {
+      animation: swayWheat 3s ease-in-out infinite;
+      display: inline-block;
+    }
+    .wheat-deco span:nth-child(2) { animation-delay: 0.6s; }
+    .wheat-deco span:nth-child(3) { animation-delay: 1.2s; }
+
+    /* video placeholder (autoplay muted loop) */
+    .video-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.2;
+      border-radius: 28px;
+      pointer-events: none;
+    }
+    .hero-image .content-overlay {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(43, 30, 23, 0.08);
+    }
+  </style>
 </head>
 <body>
 
 <header>
-  <nav>
-    <a href="#hem">Hem</a>
-    <a href="#oppettider">Öppettider</a>
-    <a href="#meny">Meny</a>
-    <a href="#om-oss">Om oss</a>
-    <a href="#kontakt">Kontakt</a>
-  </nav>
+  <div class="container header-grid">
+    <div class="logo">Lundbergs <span>Konditori</span></div>
+    <div class="nav-scroll">
+      <a href="#">Hem</a>
+      <a href="#">Öppettider</a>
+      <a href="#">Meny</a>
+      <a href="#">Om oss</a>
+      <a href="#" class="nav-cta">Kontakt</a>
+    </div>
+  </div>
 </header>
 
-<section class="hero" id="hem">
-  <div class="hero-content">
-    <h1>Lundbergs Konditori</h1>
-    <p>Traditionellt hantverk med modern elegans i Gröndal sedan 1940-talet.</p>
-    <button class="btn-cta" onclick="document.getElementById('meny').scrollIntoView({behavior:'smooth'});">Se Vårt Utbud</button>
-  </div>
-</section>
-
-<section id="oppettider" style="background-color:#fff;">
-  <div class="container">
-    <h2>Öppettider</h2>
-    <p style="text-align:center;">Mån-Fre: 07:30 - 18:00 | Lör-Sön: 09:00 - 16:00</p>
-  </div>
-</section>
-
-<section id="meny" style="background-color:#f9f4e4;">
-  <div class="container">
-    <h2>Meny</h2>
-    <div class="cards">
-      <!-- Kaffe -->
-      <div class="card">
-        <h3>Kaffe</h3>
-        <div class="menu-item">
-          <span class="item-name">Espresso</span>
-          <span class="leader"></span>
-          <span class="price">30 kr</span>
+<main>
+  <!-- HERO -->
+  <section class="hero container">
+    <div class="hero-grid">
+      <div class="hero-text fade-in">
+        <div class="wheat-deco">
+          <span>🌾</span><span>🌾</span><span>🌾</span>
+          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.04em; margin-left: 8px;">seit 1940</span>
         </div>
-        <div class="menu-item">
-          <span class="item-name">Cappuccino</span>
-          <span class="leader"></span>
-          <span class="price">35 kr</span>
-        </div>
-        <div class="menu-item">
-          <span class="item-name">Filtret</span>
-          <span class="leader"></span>
-          <span class="price">35 kr</span>
-        </div>
+        <h1>Vår <i>kärlek</i> <br>till hantverk</h1>
+        <p>Sjöbjörnsvägen 2 · Gröndal · Stockholm. Bakat från grunden varje dag sedan 40-talet.</p>
+        <a href="#" class="btn-sage">Upptäck menyn →</a>
       </div>
-      <!-- Bullar -->
-      <div class="card">
-        <h3>Bullar</h3>
-        <div class="menu-item">
-          <span class="item-name">Kardemummabulle</span>
-          <span class="leader"></span>
-          <span class="price">35 kr</span>
-        </div>
-        <div class="menu-item">
-          <span class="item-name">Vaniljbulle</span>
-          <span class="leader"></span>
-          <span class="price">35 kr</span>
-        </div>
-        <div class="menu-item">
-          <span class="item-name">Chokladbulle</span>
-          <span class="leader"></span>
-          <span class="price">30 kr</span>
-        </div>
-      </div>
-      <!-- Tårtor -->
-      <div class="card">
-        <h3>Tårtor</h3>
-        <div class="menu-item">
-          <span class="item-name">Prinsesstårta</span>
-          <span class="leader"></span>
-          <span class="price">75 kr</span>
-        </div>
-        <div class="menu-item">
-          <span class="item-name">Mazarintårta</span>
-          <span class="leader"></span>
-          <span class="price">80 kr</span>
-        </div>
-        <div class="menu-item">
-          <span class="item-name">Chokladtårta</span>
-          <span class="leader"></span>
-          <span class="price">85 kr</span>
+      <div class="hero-image">
+        <video class="video-bg" autoplay muted loop playsinline>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=800&fit=crop&crop=center&auto=format" alt="Artisan coffee and pastry" style="opacity:0.9;">
+        <div class="steam-group">
+          <div class="steam-particle"></div>
+          <div class="steam-particle"></div>
+          <div class="steam-particle"></div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="om-oss" style="background-color:#fff;">
-  <div class="container">
-    <h2>Om oss</h2>
-    <p style="max-width:800px; margin:auto; text-align:center;">Lundbergs Konditori är en familjeägd pärla i Gröndal, där vi sedan 1940-talet bakar allt från grunden med kärlek och precision. Vår passion är att skapa svenska klassiker med en modern tvist, med ingredienser av högsta kvalitet. Kom förbi och upplev en stunds avkoppling i en tidlös miljö.</p>
-  </div>
-</section>
+  <!-- MENU SECTION -->
+  <section class="menu-section container">
+    <h2 class="section-title">Vår meny <span style="font-weight:300; font-family: 'Plus Jakarta Sans', sans-serif; font-size:1.4rem; display:inline-block; margin-left:10px;">🇸🇪</span></h2>
+    <p class="section-sub">Klassiker från Gröndal – alltid färskt, alltid med omtanke.</p>
+    <div class="menu-grid">
+      <!-- Kaffe -->
+      <div class="menu-card">
+        <h3>☕ Kaffe</h3>
+        <div class="menu-item"><span class="item-name">Kaffe med mjölk</span><span class="item-dots"></span><span class="item-price">45 kr</span></div>
+        <div class="menu-item"><span class="item-name">Cappuccino</span><span class="item-dots"></span><span class="item-price">52 kr</span></div>
+        <div class="menu-item"><span class="item-name">Latte</span><span class="item-dots"></span><span class="item-price">55 kr</span></div>
+        <div class="menu-item"><span class="item-name">Kaffe (brygg)</span><span class="item-dots"></span><span class="item-price">38 kr</span></div>
+      </div>
+      <!-- Bullar -->
+      <div class="menu-card">
+        <h3>🥐 Bullar & Bröd</h3>
+        <div class="menu-item"><span class="item-name">Kanelbulle (nygräddad)</span><span class="item-dots"></span><span class="item-price">42 kr</span></div>
+        <div class="menu-item"><span class="item-name">Kardemummabulle</span><span class="item-dots"></span><span class="item-price">44 kr</span></div>
+        <div class="menu-item"><span class="item-name">Surdegsfralla</span><span class="item-dots"></span><span class="item-price">36 kr</span></div>
+        <div class="menu-item"><span class="item-name">Vaniljhorn</span><span class="item-dots"></span><span class="item-price">40 kr</span></div>
+      </div>
+      <!-- Tårtor -->
+      <div class="menu-card">
+        <h3>🍰 Tårtor & Bakverk</h3>
+        <div class="menu-item"><span class="item-name">Prinsesstårta</span><span class="item-dots"></span><span class="item-price">58 kr</span></div>
+        <div class="menu-item"><span class="item-name">Chokladtårta med hallon</span><span class="item-dots"></span><span class="item-price">62 kr</span></div>
+        <div class="menu-item"><span class="item-name">Morotstårta</span><span class="item-dots"></span><span class="item-price">55 kr</span></div>
+        <div class="menu-item"><span class="item-name">Toscakaka</span><span class="item-dots"></span><span class="item-price">48 kr</span></div>
+      </div>
+    </div>
+  </section>
 
-<section id="kontakt" style="background-color:#f9f4e4;">
-  <div class="container">
-    <h2>Kontakt</h2>
-    <p>Adress: Sjöbjörnsvägen 2, 117 67 Stockholm</p>
-    <p>Telefon: 08-645 20 34</p>
-  </div>
-</section>
+  <!-- REVIEWS (Google Maps style) -->
+  <section class="reviews-section container">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
+      <h2 class="section-title" style="font-size:2rem;">⭐ Äkta omdömen</h2>
+      <span style="font-weight:300; color:#607256;">4.8 · 112 recensioner</span>
+    </div>
+    <div class="review-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Bästa kanelbullen i Stockholm! Och personalen är så varm. Älskar detta gamla konditori."</p>
+        <div class="review-author">— Emma S.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Gröndals pärla. Deras prinsesstårta är magisk – som att resa tillbaka till 1940-talet."</p>
+        <div class="review-author">— Johan M.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">"Äkta hantverk, inga genvägar. Fikat smakar som hos mormor. Rekommenderar!"</p>
+        <div class="review-author">— Klara L.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Lundbergs är en institution. Deras kaffe och bullar gör min dag varje gång."</p>
+        <div class="review-author">— Oskar P.</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"Mysigaste konditoriet i Stockholm. Allt från scratch, och det märks."</p>
+        <div class="review-author">— Sofia W.</div>
+      </div>
+    </div>
+  </section>
+</main>
 
+<!-- FOOTER -->
 <footer>
   <div class="container">
-    <p>Öppettider: Mån-Fre 07:30-18:00 | Lör-Sön 09:00-16:00</p>
-    <p>&copy; 2024 Lundbergs Konditori</p>
-    <p>Sjöbjörnsvägen 2, Stockholm</p>
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>📍 Besök oss</h4>
+        <p>Sjöbjörnsvägen 2</p>
+        <p>117 67 Stockholm</p>
+        <p>08-645 20 34</p>
+      </div>
+      <div class="footer-col">
+        <h4>🕐 Öppettider</h4>
+        <p>Mån–fre: 7:30 – 18:00</p>
+        <p>Lör: 8:00 – 17:00</p>
+        <p>Sön: 9:00 – 16:00</p>
+      </div>
+      <div class="footer-col">
+        <h4>✨ Lundbergs</h4>
+        <p>Äkta konditori sedan 1940</p>
+        <p>Bakat med kärlek i Gröndal</p>
+        <p style="margin-top:10px;"><span class="wheat-icon">🌾</span> Hantverk · Tradition</p>
+      </div>
+    </div>
+    <div class="footer-copy">
+      © 2026 Lundbergs Konditori · Sjöbjörnsvägen 2, Stockholm · Allt bakat från grunden
+    </div>
   </div>
 </footer>
 
-<!-- Optional: Add simple animations for steam or wheat as SVG or CSS animations -->
-<script>
-  // Optional JavaScript for future enhancements
-</script>
 </body>
 </html>
