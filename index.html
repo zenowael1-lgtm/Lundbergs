@@ -1,12 +1,13 @@
+```html
 <!DOCTYPE html>
 <html lang="sv">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-  <title>Lundbergs Konditori · Gröndal</title>
+  <title>Lundbergs Konditori · Gröndal · Sedan 1940</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* ----- RESET & BASE ----- */
     * {
@@ -15,13 +16,18 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #FDFBF7;
       color: #2B1E17;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 300;
-      line-height: 1.5;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
     }
 
@@ -37,80 +43,85 @@
       padding: 0 24px;
     }
 
-    /* ----- ANIMATIONS (steam, wheat, fade) ----- */
+    /* ----- KEYFRAMES: STEAM, WHEAT, FLOATING, GLOW, SCROLL INDICATOR ----- */
     @keyframes floatSteam {
-      0% { opacity: 0.5; transform: translateY(0) scale(1); }
-      50% { opacity: 1; transform: translateY(-18px) scale(1.05); }
-      100% { opacity: 0.2; transform: translateY(-36px) scale(0.9); }
+      0% { opacity: 0.6; transform: translateY(0) scale(1) rotate(0deg); }
+      50% { opacity: 1; transform: translateY(-24px) scale(1.08) rotate(4deg); }
+      100% { opacity: 0.1; transform: translateY(-48px) scale(0.85) rotate(-4deg); }
     }
 
     @keyframes swayWheat {
-      0% { transform: rotate(-2deg) translateX(0); }
-      50% { transform: rotate(4deg) translateX(6px); }
-      100% { transform: rotate(-2deg) translateX(0); }
+      0% { transform: rotate(-3deg) translateX(0); }
+      50% { transform: rotate(6deg) translateX(8px); }
+      100% { transform: rotate(-3deg) translateX(0); }
     }
 
     @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(20px); }
+      0% { opacity: 0; transform: translateY(30px); }
       100% { opacity: 1; transform: translateY(0); }
     }
 
-    .fade-in {
-      animation: fadeUp 1s ease forwards;
+    @keyframes fadeInLeft {
+      0% { opacity: 0; transform: translateX(-30px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
-    .steam-group {
-      position: absolute;
-      top: 20%;
-      left: 10%;
-      width: 120px;
-      height: 140px;
-      pointer-events: none;
-      z-index: 2;
+    @keyframes fadeInRight {
+      0% { opacity: 0; transform: translateX(30px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
 
-    .steam-particle {
-      position: absolute;
-      bottom: 0;
-      left: 20%;
-      width: 40px;
-      height: 40px;
-      background: radial-gradient(circle, rgba(255,255,240,0.3) 0%, rgba(255,255,240,0) 80%);
-      border-radius: 50%;
-      animation: floatSteam 4s ease-in-out infinite;
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(96, 114, 86, 0.3); }
+      70% { box-shadow: 0 0 0 18px rgba(96, 114, 86, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(96, 114, 86, 0); }
     }
 
-    .steam-particle:nth-child(2) {
-      left: 50%;
-      animation-delay: 1.2s;
-      width: 50px;
-      height: 50px;
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
-    .steam-particle:nth-child(3) {
-      left: 75%;
-      animation-delay: 2.5s;
-      width: 30px;
-      height: 30px;
+
+    @keyframes grain {
+      0%, 100% { transform: translate(0, 0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-3px, -1px); }
+      80% { transform: translate(3px, 1px); }
     }
+
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+
+    .fade-in { animation: fadeUp 1.2s ease forwards; }
+    .fade-left { animation: fadeInLeft 1s ease forwards; }
+    .fade-right { animation: fadeInRight 1s ease forwards; }
 
     .wheat-icon {
       display: inline-block;
       animation: swayWheat 3s ease-in-out infinite;
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       line-height: 1;
-      margin-right: 6px;
+      margin-right: 4px;
     }
 
-    /* ----- HEADER / NAV (ultra-sleek, no wrap) ----- */
+    /* ----- HEADER / NAV ----- */
     header {
       background: #FDFBF7;
-      padding: 18px 0 12px;
+      padding: 16px 0 10px;
       border-bottom: 1px solid #E6DFD5;
       position: sticky;
       top: 0;
-      z-index: 50;
-      backdrop-filter: blur(6px);
-      background: rgba(253, 251, 247, 0.88);
+      z-index: 100;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(253, 251, 247, 0.92);
+      transition: box-shadow 0.3s;
+    }
+    header.scrolled {
+      box-shadow: 0 4px 20px rgba(43, 30, 23, 0.04);
     }
 
     .header-grid {
@@ -124,7 +135,7 @@
     .logo {
       font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 1.6rem;
+      font-size: 1.7rem;
       letter-spacing: -0.02em;
       color: #2B1E17;
       white-space: nowrap;
@@ -135,113 +146,201 @@
       font-weight: 400;
       font-style: italic;
     }
+    .logo small {
+      font-size: 0.6rem;
+      font-weight: 300;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      letter-spacing: 0.04em;
+      color: #607256;
+      margin-left: 6px;
+    }
 
     .nav-scroll {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
-      gap: 8px 18px;
+      gap: 8px 24px;
       padding: 4px 0 8px;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none;
       -ms-overflow-style: none;
       flex: 1 1 auto;
       justify-content: flex-end;
     }
-    .nav-scroll::-webkit-scrollbar {
-      display: none;
-    }
+    .nav-scroll::-webkit-scrollbar { display: none; }
 
     .nav-scroll a {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 400;
       font-size: 0.9rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
       color: #2B1E17;
       text-decoration: none;
       white-space: nowrap;
       padding: 4px 0;
-      border-bottom: 1.5px solid transparent;
-      transition: border 0.2s, color 0.2s;
+      border-bottom: 2px solid transparent;
+      transition: border 0.25s, color 0.25s;
+      position: relative;
     }
-    .nav-scroll a:hover {
-      border-bottom-color: #607256;
-      color: #607256;
+    .nav-scroll a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #607256;
+      transition: width 0.3s ease;
     }
+    .nav-scroll a:hover::after { width: 100%; }
+    .nav-scroll a:hover { color: #607256; }
 
     .nav-cta {
       background: #607256;
       color: #FDFBF7 !important;
-      padding: 6px 16px !important;
+      padding: 8px 22px !important;
       border-radius: 40px;
       border-bottom: none !important;
       font-weight: 500;
-      transition: background 0.2s;
+      transition: background 0.25s, transform 0.2s;
       white-space: nowrap;
       flex-shrink: 0;
     }
+    .nav-cta::after { display: none !important; }
     .nav-cta:hover {
       background: #4d5e44 !important;
-      border-bottom: none !important;
+      transform: scale(0.96);
+      color: #FDFBF7 !important;
     }
 
-    /* ----- HERO ----- */
+    /* ----- HERO (epic) ----- */
     .hero {
-      padding: 50px 0 60px;
+      padding: 60px 0 80px;
       position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -10%;
+      width: 60%;
+      height: 120%;
+      background: radial-gradient(circle, rgba(96, 114, 86, 0.03) 0%, transparent 70%);
+      pointer-events: none;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 50px;
       align-items: center;
     }
 
     .hero-text h1 {
-      font-size: clamp(2.8rem, 10vw, 4.8rem);
-      line-height: 1.1;
+      font-size: clamp(3.2rem, 10vw, 5.4rem);
+      line-height: 1.05;
       font-weight: 700;
       letter-spacing: -0.02em;
+      margin-bottom: 8px;
     }
     .hero-text h1 i {
       font-weight: 400;
       color: #607256;
       font-style: italic;
+      position: relative;
     }
-    .hero-text p {
-      font-size: 1.1rem;
+    .hero-text h1 i::after {
+      content: '✦';
+      font-size: 1.2rem;
+      color: #607256;
+      margin-left: 8px;
+      opacity: 0.4;
+    }
+    .hero-text .subhead {
+      font-size: 1.2rem;
       font-weight: 300;
-      margin: 24px 0 32px;
-      max-width: 440px;
+      margin: 16px 0 12px;
       color: #3d2f26;
+      letter-spacing: 0.02em;
+    }
+    .hero-text .desc {
+      font-size: 1.05rem;
+      font-weight: 300;
+      max-width: 460px;
+      color: #4d3d32;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 30px;
+      margin-top: 16px;
+    }
+    .hero-badges span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: #607256;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-badges span::before {
+      content: '●';
+      font-size: 0.5rem;
+      color: #607256;
     }
 
     .btn-sage {
       background: #607256;
       color: #FDFBF7;
       border: none;
-      padding: 14px 44px;
+      padding: 16px 52px;
       border-radius: 60px;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 500;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-      transition: opacity 0.4s ease, transform 0.2s;
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      transition: all 0.4s ease;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(96, 114, 86, 0.15);
+      box-shadow: 0 8px 28px rgba(96, 114, 86, 0.2);
       display: inline-block;
       text-decoration: none;
+      animation: pulseGlow 2.5s infinite;
     }
     .btn-sage:hover {
-      opacity: 0.75;
-      transform: scale(0.98);
+      background: #4d5e44;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(96, 114, 86, 0.3);
+    }
+    .btn-sage-outline {
+      background: transparent;
+      color: #2B1E17;
+      border: 1.5px solid #E6DFD5;
+      padding: 14px 40px;
+      border-radius: 60px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      transition: all 0.3s;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+      margin-left: 12px;
+    }
+    .btn-sage-outline:hover {
+      border-color: #607256;
+      background: #607256;
+      color: #FDFBF7;
     }
 
     .hero-image {
       position: relative;
-      border-radius: 28px;
+      border-radius: 32px;
       overflow: hidden;
-      box-shadow: 0 24px 48px -12px rgba(43, 30, 23, 0.12);
+      box-shadow: 0 32px 64px -16px rgba(43, 30, 23, 0.15);
       aspect-ratio: 1/1;
       background: #E6DFD5;
     }
@@ -250,72 +349,166 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.8s ease;
+    }
+    .hero-image:hover img {
+      transform: scale(1.02);
     }
     .hero-image .steam-group {
-      top: 10%;
+      position: absolute;
+      top: 8%;
       left: 5%;
+      width: 160px;
+      height: 180px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .steam-particle {
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      width: 50px;
+      height: 50px;
+      background: radial-gradient(circle, rgba(255, 248, 235, 0.35) 0%, rgba(255, 248, 235, 0) 80%);
+      border-radius: 50%;
+      animation: floatSteam 5s ease-in-out infinite;
+    }
+    .steam-particle:nth-child(2) { left: 50%; animation-delay: 1.6s; width: 60px; height: 60px; }
+    .steam-particle:nth-child(3) { left: 75%; animation-delay: 3s; width: 40px; height: 40px; }
+    .steam-particle:nth-child(4) { left: 10%; animation-delay: 2.2s; width: 35px; height: 35px; }
+    .steam-particle:nth-child(5) { left: 65%; animation-delay: 0.8s; width: 45px; height: 45px; }
+
+    .hero-image .floating-badge {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(253, 251, 247, 0.92);
+      backdrop-filter: blur(8px);
+      padding: 12px 20px;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #2B1E17;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      z-index: 4;
+      animation: floatY 3s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-image .floating-badge span {
+      color: #607256;
+      font-size: 1.2rem;
     }
 
-    /* ----- MENU CARDS ----- */
+    /* ----- SCROLL INDICATOR ----- */
+    .scroll-indicator {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px;
+      gap: 8px;
+      opacity: 0.5;
+      animation: floatY 2s ease-in-out infinite;
+    }
+    .scroll-indicator span {
+      width: 8px;
+      height: 8px;
+      background: #607256;
+      border-radius: 50%;
+      display: inline-block;
+      opacity: 0.3;
+    }
+    .scroll-indicator span:nth-child(2) { opacity: 0.6; }
+    .scroll-indicator span:nth-child(3) { opacity: 0.9; }
+
+    /* ----- MENU SECTION (full) ----- */
     .menu-section {
-      padding: 60px 0 70px;
+      padding: 80px 0 90px;
       border-top: 1px solid #E6DFD5;
+      background: rgba(253, 251, 247, 0.6);
     }
 
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
     .section-title {
-      font-size: 2.8rem;
+      font-size: 3rem;
       font-weight: 600;
-      margin-bottom: 12px;
+      line-height: 1.1;
+    }
+    .section-title small {
+      font-size: 1.1rem;
+      font-weight: 300;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      display: block;
+      color: #607256;
+      letter-spacing: 0.06em;
+      margin-top: 4px;
     }
     .section-sub {
       font-weight: 300;
       color: #4d3d32;
-      margin-bottom: 48px;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
+      max-width: 500px;
     }
 
     .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
     }
 
     .menu-card {
       border: 1px solid #E6DFD5;
       border-radius: 32px;
-      padding: 28px 24px 24px;
-      background: rgba(255, 253, 249, 0.4);
-      backdrop-filter: blur(2px);
-      transition: box-shadow 0.3s, transform 0.2s;
-      box-shadow: 0 4px 12px rgba(43, 30, 23, 0.02);
+      padding: 32px 28px 28px;
+      background: #FDFBF7;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 16px rgba(43, 30, 23, 0.02);
     }
     .menu-card:hover {
-      box-shadow: 0 12px 28px -8px rgba(43, 30, 23, 0.06);
-      transform: translateY(-4px);
+      box-shadow: 0 20px 48px -12px rgba(43, 30, 23, 0.08);
+      transform: translateY(-6px);
+      border-color: #607256;
     }
 
     .menu-card h3 {
       font-family: 'Playfair Display', serif;
       font-weight: 600;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       letter-spacing: -0.01em;
       border-bottom: 1px solid #E6DFD5;
-      padding-bottom: 12px;
-      margin-bottom: 20px;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
       color: #2B1E17;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .menu-card h3 span {
+      font-size: 1.8rem;
     }
 
     .menu-item {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      padding: 8px 0;
+      padding: 10px 0;
       font-weight: 300;
-      border-bottom: 1px dashed rgba(230, 223, 213, 0.4);
+      border-bottom: 1px dashed rgba(230, 223, 213, 0.5);
+      transition: background 0.2s;
+      padding-left: 4px;
+      padding-right: 4px;
+      border-radius: 4px;
     }
-    .menu-item:last-of-type {
-      border-bottom: none;
+    .menu-item:hover {
+      background: rgba(96, 114, 86, 0.03);
     }
+    .menu-item:last-of-type { border-bottom: none; }
 
     .item-name {
       font-weight: 400;
@@ -326,7 +519,7 @@
     .item-dots {
       flex: 1 1 auto;
       border-bottom: 1.5px dotted #d8d0c4;
-      margin: 0 8px;
+      margin: 0 10px;
       height: 0.8em;
     }
     .item-price {
@@ -334,19 +527,77 @@
       font-size: 1rem;
       color: #607256;
       letter-spacing: 0.02em;
+      background: rgba(96, 114, 86, 0.06);
+      padding: 2px 12px;
+      border-radius: 30px;
     }
 
-    /* ----- REVIEWS (google maps style) ----- */
-    .reviews-section {
-      padding: 30px 0 60px;
+    .menu-note {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: #607256;
+      font-weight: 400;
+      letter-spacing: 0.02em;
       border-top: 1px solid #E6DFD5;
+      padding-top: 16px;
+    }
+
+    /* ----- SPECIALTIES (extra section) ----- */
+    .specialties {
+      padding: 70px 0 80px;
+      border-top: 1px solid #E6DFD5;
+    }
+    .special-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+    .special-item {
+      text-align: center;
+      padding: 32px 16px;
+      border-radius: 32px;
+      background: #FDFBF7;
+      border: 1px solid #E6DFD5;
+      transition: all 0.3s;
+    }
+    .special-item:hover {
+      transform: translateY(-4px);
+      border-color: #607256;
+      box-shadow: 0 12px 32px rgba(96, 114, 86, 0.06);
+    }
+    .special-item .emoji-big {
+      font-size: 3.2rem;
+      display: block;
+      margin-bottom: 12px;
+      animation: floatY 3s ease-in-out infinite;
+    }
+    .special-item h4 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+      color: #2B1E17;
+    }
+    .special-item p {
+      font-weight: 300;
+      font-size: 0.9rem;
+      color: #4d3d32;
+      margin-top: 6px;
+    }
+
+    /* ----- REVIEWS (expanded) ----- */
+    .reviews-section {
+      padding: 60px 0 80px;
+      border-top: 1px solid #E6DFD5;
+      background: rgba(253, 251, 247, 0.4);
     }
     .review-grid {
       display: flex;
       flex-wrap: nowrap;
       overflow-x: auto;
-      gap: 28px;
-      padding: 20px 4px 30px;
+      gap: 30px;
+      padding: 24px 4px 40px;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
     }
@@ -361,55 +612,105 @@
     }
 
     .review-card {
-      flex: 0 0 280px;
+      flex: 0 0 300px;
       background: #FDFBF7;
       border: 1px solid #E6DFD5;
       border-radius: 28px;
-      padding: 24px 22px;
+      padding: 28px 24px;
+      transition: all 0.3s;
       box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-      transition: transform 0.2s;
     }
     .review-card:hover {
-      transform: scale(1.01);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(43, 30, 23, 0.05);
     }
     .review-stars {
       color: #607256;
-      letter-spacing: 2px;
+      letter-spacing: 3px;
       font-size: 1.1rem;
+      margin-bottom: 6px;
     }
     .review-text {
       font-weight: 300;
-      margin: 12px 0 8px;
+      margin: 10px 0 12px;
       font-size: 0.95rem;
-      line-height: 1.5;
+      line-height: 1.6;
+      color: #2B1E17;
     }
     .review-author {
       font-weight: 500;
-      color: #2B1E17;
+      color: #607256;
       font-size: 0.85rem;
+      letter-spacing: 0.02em;
+    }
+    .review-date {
+      font-weight: 300;
+      font-size: 0.75rem;
+      color: #8f7e6f;
     }
 
-    /* ----- FOOTER (minimal) ----- */
+    /* ----- ABOUT / HISTORIA ----- */
+    .about-section {
+      padding: 80px 0;
+      border-top: 1px solid #E6DFD5;
+      background: #FDFBF7;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .about-text h2 {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .about-text h2 i {
+      color: #607256;
+      font-weight: 400;
+    }
+    .about-text p {
+      font-weight: 300;
+      font-size: 1.05rem;
+      color: #3d2f26;
+      margin-bottom: 16px;
+      line-height: 1.8;
+    }
+    .about-image {
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 24px 48px -12px rgba(43, 30, 23, 0.1);
+      aspect-ratio: 4/3;
+    }
+    .about-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ----- FOOTER (enhanced) ----- */
     footer {
       background: #FDFBF7;
       border-top: 1px solid #E6DFD5;
-      padding: 48px 0 32px;
+      padding: 56px 0 32px;
     }
 
     .footer-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
     }
     .footer-col h4 {
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 600;
       font-size: 0.85rem;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #607256;
-      margin-bottom: 12px;
+      margin-bottom: 16px;
     }
     .footer-col p, .footer-col a {
       font-weight: 300;
@@ -417,291 +718,61 @@
       color: #2B1E17;
       text-decoration: none;
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      transition: color 0.2s;
     }
-    .footer-col a:hover {
+    .footer-col a:hover { color: #607256; }
+    .footer-col .social-links {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .footer-col .social-links a {
+      font-size: 1.3rem;
       color: #607256;
+      transition: transform 0.2s;
     }
+    .footer-col .social-links a:hover {
+      transform: scale(1.2);
+    }
+
     .footer-copy {
-      margin-top: 40px;
       padding-top: 24px;
       border-top: 1px solid #E6DFD5;
       font-size: 0.8rem;
       text-align: center;
       color: #5f5043;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.03em;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
-    /* ----- RESPONSIVE (mobile perfection) ----- */
+    /* ----- RESPONSIVE (flawless mobile) ----- */
+    @media (max-width: 968px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 30px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .about-image { aspect-ratio: 4/3; max-height: 320px; }
+      .hero-text h1 { font-size: clamp(2.8rem, 10vw, 4rem); }
+    }
+
     @media (max-width: 768px) {
-      .header-grid {
-        flex-wrap: nowrap;
-        gap: 8px;
-      }
-      .logo {
-        font-size: 1.4rem;
-      }
-      .nav-scroll {
-        gap: 6px 12px;
-        justify-content: flex-end;
-      }
-      .nav-scroll a {
-        font-size: 0.8rem;
-      }
-      .nav-cta {
-        padding: 4px 14px !important;
-        font-size: 0.75rem;
-      }
+      .header-grid { flex-wrap: nowrap; gap: 6px; }
+      .logo { font-size: 1.3rem; }
+      .logo small { display: none; }
+      .nav-scroll { gap: 4px 14px; }
+      .nav-scroll a { font-size: 0.78rem; }
+      .nav-cta { padding: 6px 16px !important; font-size: 0.75rem; }
 
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      .hero-text h1 {
-        font-size: clamp(2.6rem, 12vw, 3.8rem);
-      }
-      .hero-image {
-        aspect-ratio: 4/3;
-        max-height: 320px;
-      }
-      .hero-image .steam-group {
-        top: 5%;
-        left: 2%;
-        width: 80px;
-        height: 100px;
-      }
+      .section-title { font-size: 2.4rem; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .special-grid { grid-template-columns: 1fr 1fr; }
 
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-      .section-title {
-        font-size: 2.4rem;
-      }
+      .review-card { flex: 0 0 260px; padding: 20px; }
+      .hero-image .steam-group { width: 100px; height: 120px; }
+      .steam-particle { width: 30px; height: 30px; }
+      .steam-particle:nth-child(2) { width: 40px; height: 40px; }
+      .steam-particle:nth-child(3) { width: 25px; height: 25px; }
 
-      .review-grid {
-        gap: 16px;
-      }
-      .review-card {
-        flex: 0 0 240px;
-        padding: 18px;
-      }
-
-      .footer-grid {
-        flex-direction: column;
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 18px;
-      }
-      .nav-scroll {
-        gap: 4px 10px;
-      }
-      .nav-scroll a {
-        font-size: 0.7rem;
-        letter-spacing: 0.01em;
-      }
-      .logo {
-        font-size: 1.2rem;
-      }
-      .btn-sage {
-        padding: 12px 32px;
-        font-size: 0.9rem;
-        width: 100%;
-        text-align: center;
-      }
-      .hero-text p {
-        font-size: 1rem;
-      }
-    }
-
-    /* utility */
-    .mt-1 { margin-top: 10px; }
-    .mb-1 { margin-bottom: 10px; }
-    .text-sage { color: #607256; }
-    .border-soft { border-color: #E6DFD5; }
-
-    /* Video / wheat decoration */
-    .wheat-deco {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 1.2rem;
-      color: #607256;
-      opacity: 0.7;
-    }
-    .wheat-deco span {
-      animation: swayWheat 3s ease-in-out infinite;
-      display: inline-block;
-    }
-    .wheat-deco span:nth-child(2) { animation-delay: 0.6s; }
-    .wheat-deco span:nth-child(3) { animation-delay: 1.2s; }
-
-    /* video placeholder (autoplay muted loop) */
-    .video-bg {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: 0;
-      opacity: 0.2;
-      border-radius: 28px;
-      pointer-events: none;
-    }
-    .hero-image .content-overlay {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(43, 30, 23, 0.08);
-    }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="container header-grid">
-    <div class="logo">Lundbergs <span>Konditori</span></div>
-    <div class="nav-scroll">
-      <a href="#">Hem</a>
-      <a href="#">Öppettider</a>
-      <a href="#">Meny</a>
-      <a href="#">Om oss</a>
-      <a href="#" class="nav-cta">Kontakt</a>
-    </div>
-  </div>
-</header>
-
-<main>
-  <!-- HERO -->
-  <section class="hero container">
-    <div class="hero-grid">
-      <div class="hero-text fade-in">
-        <div class="wheat-deco">
-          <span>🌾</span><span>🌾</span><span>🌾</span>
-          <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 300; font-size: 0.8rem; letter-spacing: 0.04em; margin-left: 8px;">seit 1940</span>
-        </div>
-        <h1>Vår <i>kärlek</i> <br>till hantverk</h1>
-        <p>Sjöbjörnsvägen 2 · Gröndal · Stockholm. Bakat från grunden varje dag sedan 40-talet.</p>
-        <a href="#" class="btn-sage">Upptäck menyn →</a>
-      </div>
-      <div class="hero-image">
-        <video class="video-bg" autoplay muted loop playsinline>
-          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-        </video>
-        <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=800&fit=crop&crop=center&auto=format" alt="Artisan coffee and pastry" style="opacity:0.9;">
-        <div class="steam-group">
-          <div class="steam-particle"></div>
-          <div class="steam-particle"></div>
-          <div class="steam-particle"></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MENU SECTION -->
-  <section class="menu-section container">
-    <h2 class="section-title">Vår meny <span style="font-weight:300; font-family: 'Plus Jakarta Sans', sans-serif; font-size:1.4rem; display:inline-block; margin-left:10px;">🇸🇪</span></h2>
-    <p class="section-sub">Klassiker från Gröndal – alltid färskt, alltid med omtanke.</p>
-    <div class="menu-grid">
-      <!-- Kaffe -->
-      <div class="menu-card">
-        <h3>☕ Kaffe</h3>
-        <div class="menu-item"><span class="item-name">Kaffe med mjölk</span><span class="item-dots"></span><span class="item-price">45 kr</span></div>
-        <div class="menu-item"><span class="item-name">Cappuccino</span><span class="item-dots"></span><span class="item-price">52 kr</span></div>
-        <div class="menu-item"><span class="item-name">Latte</span><span class="item-dots"></span><span class="item-price">55 kr</span></div>
-        <div class="menu-item"><span class="item-name">Kaffe (brygg)</span><span class="item-dots"></span><span class="item-price">38 kr</span></div>
-      </div>
-      <!-- Bullar -->
-      <div class="menu-card">
-        <h3>🥐 Bullar & Bröd</h3>
-        <div class="menu-item"><span class="item-name">Kanelbulle (nygräddad)</span><span class="item-dots"></span><span class="item-price">42 kr</span></div>
-        <div class="menu-item"><span class="item-name">Kardemummabulle</span><span class="item-dots"></span><span class="item-price">44 kr</span></div>
-        <div class="menu-item"><span class="item-name">Surdegsfralla</span><span class="item-dots"></span><span class="item-price">36 kr</span></div>
-        <div class="menu-item"><span class="item-name">Vaniljhorn</span><span class="item-dots"></span><span class="item-price">40 kr</span></div>
-      </div>
-      <!-- Tårtor -->
-      <div class="menu-card">
-        <h3>🍰 Tårtor & Bakverk</h3>
-        <div class="menu-item"><span class="item-name">Prinsesstårta</span><span class="item-dots"></span><span class="item-price">58 kr</span></div>
-        <div class="menu-item"><span class="item-name">Chokladtårta med hallon</span><span class="item-dots"></span><span class="item-price">62 kr</span></div>
-        <div class="menu-item"><span class="item-name">Morotstårta</span><span class="item-dots"></span><span class="item-price">55 kr</span></div>
-        <div class="menu-item"><span class="item-name">Toscakaka</span><span class="item-dots"></span><span class="item-price">48 kr</span></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REVIEWS (Google Maps style) -->
-  <section class="reviews-section container">
-    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap;">
-      <h2 class="section-title" style="font-size:2rem;">⭐ Äkta omdömen</h2>
-      <span style="font-weight:300; color:#607256;">4.8 · 112 recensioner</span>
-    </div>
-    <div class="review-grid">
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Bästa kanelbullen i Stockholm! Och personalen är så varm. Älskar detta gamla konditori."</p>
-        <div class="review-author">— Emma S.</div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Gröndals pärla. Deras prinsesstårta är magisk – som att resa tillbaka till 1940-talet."</p>
-        <div class="review-author">— Johan M.</div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★☆</div>
-        <p class="review-text">"Äkta hantverk, inga genvägar. Fikat smakar som hos mormor. Rekommenderar!"</p>
-        <div class="review-author">— Klara L.</div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Lundbergs är en institution. Deras kaffe och bullar gör min dag varje gång."</p>
-        <div class="review-author">— Oskar P.</div>
-      </div>
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">"Mysigaste konditoriet i Stockholm. Allt från scratch, och det märks."</p>
-        <div class="review-author">— Sofia W.</div>
-      </div>
-    </div>
-  </section>
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-grid">
-      <div class="footer-col">
-        <h4>📍 Besök oss</h4>
-        <p>Sjöbjörnsvägen 2</p>
-        <p>117 67 Stockholm</p>
-        <p>08-645 20 34</p>
-      </div>
-      <div class="footer-col">
-        <h4>🕐 Öppettider</h4>
-        <p>Mån–fre: 7:30 – 18:00</p>
-        <p>Lör: 8:00 – 17:00</p>
-        <p>Sön: 9:00 – 16:00</p>
-      </div>
-      <div class="footer-col">
-        <h4>✨ Lundbergs</h4>
-        <p>Äkta konditori sedan 1940</p>
-        <p>Bakat med kärlek i Gröndal</p>
-        <p style="margin-top:10px;"><span class="wheat-icon">🌾</span> Hantverk · Tradition</p>
-      </div>
-    </div>
-    <div class="footer-copy">
-      © 2026 Lundbergs Konditori · Sjöbjörnsvägen 2, Stockholm · Allt bakat från grunden
-    </div>
-  </div>
-</footer>
-
-</body>
-</html>
+      .btn-sage { padding: 14px 36px; font-siz
